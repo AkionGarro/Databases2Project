@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./CsvReader.css";
 
 export default function CsvReader() {
   const [csvFile, setCsvFile] = useState();
@@ -7,7 +8,7 @@ export default function CsvReader() {
   const processCSV = (str, delim = ",") => {
     const headers = str.slice(0, str.indexOf("\n")).split(delim);
     const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-
+    console.log(headers);
     const newArray = rows.map((row) => {
       const values = row.split(delim);
       const eachObject = headers.reduce((obj, header, i) => {
@@ -16,7 +17,7 @@ export default function CsvReader() {
       }, {});
       return eachObject;
     });
-    setCsvArray(newArray);
+    //setCsvArray(newArray);
   };
 
   const submit = () => {
@@ -31,7 +32,7 @@ export default function CsvReader() {
   };
 
   return (
-    <form id="csv-form">
+    <form id="csv-form" className="content">
       <input
         type="file"
         accept=".csv"
@@ -43,6 +44,7 @@ export default function CsvReader() {
 
       <br />
       <button
+        className="btn btn-primary"
         onClick={(e) => {
           e.preventDefault();
           if (csvFile) submit();
