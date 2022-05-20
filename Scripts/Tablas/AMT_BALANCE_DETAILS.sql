@@ -17,6 +17,12 @@ CREATE TABLE [AMT_BALANCE_DETAILS](
 	[RECEIVABLE_PRINCIPAL] [varchar](50) NULL,
 	[RECIVABLE] [varchar](50) NULL,
 	[TOTAL_RECEIVABLE] [varchar](50) NULL,
-
 	
 ) 
+
+ALTER TABLE Saldos.AMT_BALANCE_DETAILS
+   ADD CONSTRAINT FK_AMT_BALANCE_Credit_Card FOREIGN KEY (ID_CCB)
+      REFERENCES Saldos.credit_card_balance(ID_CCB)
+      ON DELETE no action
+      ON UPDATE no action
+;

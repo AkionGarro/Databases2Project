@@ -14,3 +14,11 @@ CREATE TABLE [FlagsProvidedInformation](
 
 ) 
 
+
+ALTER TABLE Acceso.FlagsProvidedInformation
+   ADD CONSTRAINT FK_FlagsProvidedInformation_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE no action
+      ON UPDATE no action
+;
+

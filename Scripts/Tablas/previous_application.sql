@@ -1,8 +1,11 @@
 USE [ProyectoBasesDatos2]
 GO
 
+
 CREATE TABLE [previous_application](
-	[SK_ID_PREV] [varchar](50) NULL, /*Agregar la PK*/
+	[SK_ID_PREV] [varchar](50) NOT NULL, /*Agregar la PK*/
+	CONSTRAINT PK_previous_application_SK_ID_PREV PRIMARY KEY CLUSTERED (SK_ID_PREV),
+
 	[SK_ID_CURR] [varchar](50) NULL, /*Agregar la FK*/
 	[NAME_CONTRACT_TYPE] [varchar](50) NULL,
 	[WEEKDAY_APPR_PROCESS_START] [varchar](50) NULL,
@@ -36,3 +39,9 @@ CREATE TABLE [previous_application](
 	[NFLAG_INSURED_ON_APPROVAL] [varchar](50) NULL
 ) 
 
+ALTER TABLE Saldos.previous_application
+   ADD CONSTRAINT FK_previousA_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+;

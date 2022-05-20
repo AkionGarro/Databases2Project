@@ -13,3 +13,10 @@ CREATE TABLE [AMT_CREDIT](
 	[ANNUITY] [varchar](50) NULL
 ) 
 
+ALTER TABLE Creditos.AMT_CREDIT
+   ADD CONSTRAINT FK_AMT_CREDIT_bureau FOREIGN KEY (SK_ID_BUREAU)
+      REFERENCES Creditos.bureau(SK_ID_BUREAU)
+      ON DELETE no action
+      ON UPDATE no action
+;
+

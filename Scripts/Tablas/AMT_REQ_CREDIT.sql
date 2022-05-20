@@ -14,3 +14,10 @@ CREATE TABLE [AMT_REQ_CREDIT](
 	[BUREAU_YEAR] [varchar](50) NULL
 )
 
+
+ALTER TABLE Acceso.AMT_REQ_CREDIT
+   ADD CONSTRAINT FK_AMT_REQ_CREDIT_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE no action
+      ON UPDATE no action
+;

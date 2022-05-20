@@ -55,3 +55,9 @@ CREATE TABLE [ClientApartmentsDetails](
 	[EMERGENCYSTATE_MODE] [varchar](50) NULL,
 ) 
 
+ALTER TABLE Acceso.ClientApartmentsDetails
+   ADD CONSTRAINT FK_ClientApartments_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE no action
+      ON UPDATE no action
+;

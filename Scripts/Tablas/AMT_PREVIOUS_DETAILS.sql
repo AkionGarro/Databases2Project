@@ -11,3 +11,10 @@ CREATE TABLE [AMT_PREVIOUS_DETAILS](
 	[AMT_GOODS_PRICE] [varchar](50) NULL,
 
 ) 
+
+ALTER TABLE Saldos.AMT_PREVIOUS_DETAILS
+   ADD CONSTRAINT FK_AMT_PREVIOUS_previousA FOREIGN KEY (SK_ID_PREV)
+      REFERENCES Saldos.previous_application(SK_ID_PREV)
+      ON DELETE no action
+      ON UPDATE no action
+;

@@ -4,7 +4,8 @@ GO
 
 
 CREATE TABLE [bureau](
-	[SK_ID_BUREAU] [varchar](50) NULL, /*Agregar la PK*/
+	[SK_ID_BUREAU] [varchar](50) NOT NULL, /*Agregar la PK*/
+	CONSTRAINT PK_bureau_SK_ID_BUREAU PRIMARY KEY CLUSTERED (SK_ID_BUREAU),
 	[SK_ID_CURR] [varchar](50) NULL, /*Agregar la FK*/
 	
 	[CREDIT_ACTIVE] [varchar](50) NULL,
@@ -19,3 +20,11 @@ CREATE TABLE [bureau](
 
 )
 
+
+
+ALTER TABLE Creditos.bureau
+   ADD CONSTRAINT FK_bureau_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE no action
+      ON UPDATE no action
+;

@@ -13,3 +13,17 @@ CREATE TABLE [installments_payments](
 	[AMT_PAYMENT] [varchar](50) NULL
 ) 
 
+ALTER TABLE Saldos.installments_payments
+   ADD CONSTRAINT FK_installments_payments_previousA FOREIGN KEY (SK_ID_PREV)
+      REFERENCES Saldos.previous_application(SK_ID_PREV)
+      ON DELETE no action
+      ON UPDATE no action
+;
+
+ALTER TABLE Saldos.installments_payments
+   ADD CONSTRAINT FK_installments_payments_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE no action
+      ON UPDATE no action
+;
+

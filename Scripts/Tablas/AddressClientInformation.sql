@@ -23,3 +23,9 @@ CREATE TABLE [AddressClientInformation](
 	
 ) 
 
+ALTER TABLE Acceso.AddressClientInformation
+   ADD CONSTRAINT FK_AddressClientI_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE no action
+      ON UPDATE no action
+;

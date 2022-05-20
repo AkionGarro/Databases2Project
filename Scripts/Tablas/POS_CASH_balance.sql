@@ -12,3 +12,17 @@ CREATE TABLE [POS_CASH_balance](
 	[SK_DPD_DEF] [varchar](50) NULL
 ) 
 
+ALTER TABLE Saldos.POS_CASH_balance
+   ADD CONSTRAINT FK_POS_CASH_previousA FOREIGN KEY (SK_ID_PREV)
+      REFERENCES Saldos.previous_application(SK_ID_PREV)
+      ON DELETE no action
+      ON UPDATE no action
+;
+
+ALTER TABLE Saldos.POS_CASH_balance
+   ADD CONSTRAINT FK_POS_CASH_ApplicationT FOREIGN KEY (SK_ID_CURR)
+      REFERENCES Acceso.application_train(SK_ID_CURR)
+      ON DELETE no action
+      ON UPDATE no action
+;
+
