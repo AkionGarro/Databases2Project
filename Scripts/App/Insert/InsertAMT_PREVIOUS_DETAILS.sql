@@ -1,0 +1,35 @@
+USE [ProyectoBasesDatos2]
+GO
+
+DROP PROCEDURE SPInsertAMT_PREVIOUS_DETAILS;
+CREATE PROCEDURE SPInsertAMT_PREVIOUS_DETAILS 
+			@SK_ID_PREV VARCHAR 
+           ,@AMT_ANNUITY VARCHAR 
+           ,@AMT_APPLICATION VARCHAR 
+           ,@AMT_CREDIT VARCHAR 
+           ,@AMT_DOWN_PAYMENT VARCHAR 
+           ,@AMT_GOODS_PRICE VARCHAR 
+AS
+	BEGIN
+	INSERT INTO [Saldos].[AMT_PREVIOUS_DETAILS]
+           ([SK_ID_PREV]
+           ,[AMT_ANNUITY]
+           ,[AMT_APPLICATION]
+           ,[AMT_CREDIT]
+           ,[AMT_DOWN_PAYMENT]
+           ,[AMT_GOODS_PRICE])
+     VALUES
+           (@SK_ID_PREV
+           ,@AMT_ANNUITY
+           ,@AMT_APPLICATION
+           ,@AMT_CREDIT
+           ,@AMT_DOWN_PAYMENT
+           ,@AMT_GOODS_PRICE)
+
+	END
+GO
+
+
+
+
+

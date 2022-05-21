@@ -1,0 +1,60 @@
+USE [ProyectoBasesDatos2]
+GO
+
+DROP PROCEDURE SPInsertAddressClientInformation;
+CREATE PROCEDURE SPInsertAddressClientInformation 
+			@SK_ID_CURR VARCHAR
+           ,@REGION_RATING_CLIENT VARCHAR
+           ,@REGION_RATING_CLIENT_W_CITY VARCHAR
+           ,@WEEKDAY_APPR_PROCESS_START VARCHAR
+           ,@HOUR_APPR_PROCESS_START VARCHAR
+           ,@REG_REGION_NOT_LIVE_REGION VARCHAR
+           ,@REG_REGION_NOT_WORK_REGION VARCHAR
+           ,@LIVE_REGION_NOT_WORK_REGION VARCHAR
+           ,@REG_CITY_NOT_LIVE_CITY VARCHAR
+           ,@REG_CITY_NOT_WORK_CITY VARCHAR
+           ,@LIVE_CITY_NOT_WORK_CITY VARCHAR
+           ,@ORGANIZATION_TYPE VARCHAR
+           ,@EXT_SOURCE_1 VARCHAR
+           ,@EXT_SOURCE_2 VARCHAR
+           ,@EXT_SOURCE_3 VARCHAR
+AS
+	BEGIN
+	INSERT INTO [Acceso].[AddressClientInformation]
+           ([SK_ID_CURR]
+           ,[REGION_RATING_CLIENT]
+           ,[REGION_RATING_CLIENT_W_CITY]
+           ,[WEEKDAY_APPR_PROCESS_START]
+           ,[HOUR_APPR_PROCESS_START]
+           ,[REG_REGION_NOT_LIVE_REGION]
+           ,[REG_REGION_NOT_WORK_REGION]
+           ,[LIVE_REGION_NOT_WORK_REGION]
+           ,[REG_CITY_NOT_LIVE_CITY]
+           ,[REG_CITY_NOT_WORK_CITY]
+           ,[LIVE_CITY_NOT_WORK_CITY]
+           ,[ORGANIZATION_TYPE]
+           ,[EXT_SOURCE_1]
+           ,[EXT_SOURCE_2]
+           ,[EXT_SOURCE_3])
+     VALUES
+           (@SK_ID_CURR
+           ,@REGION_RATING_CLIENT
+           ,@REGION_RATING_CLIENT_W_CITY
+           ,@WEEKDAY_APPR_PROCESS_START
+           ,@HOUR_APPR_PROCESS_START
+           ,@REG_REGION_NOT_LIVE_REGION
+           ,@REG_REGION_NOT_WORK_REGION
+           ,@LIVE_REGION_NOT_WORK_REGION
+           ,@REG_CITY_NOT_LIVE_CITY
+           ,@REG_CITY_NOT_WORK_CITY
+           ,@LIVE_CITY_NOT_WORK_CITY
+           ,@ORGANIZATION_TYPE
+           ,@EXT_SOURCE_1
+           ,@EXT_SOURCE_2
+           ,@EXT_SOURCE_3)
+
+	END
+GO
+
+
+

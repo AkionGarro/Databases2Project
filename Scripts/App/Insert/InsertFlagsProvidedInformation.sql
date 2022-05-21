@@ -1,0 +1,31 @@
+USE [ProyectoBasesDatos2]
+GO
+
+DROP PROCEDURE SPInsertFlagsProvidedInfo;
+CREATE PROCEDURE SPInsertFlagsProvidedInfo @SK_ID_CURR varchar
+, @FLAG_OWN_CAR varchar
+, @FLAG_OWN_REALTY varchar
+, @FLAG_MOBIL varchar
+, @FLAG_EMP_PHONE varchar
+, @FLAG_WORK_PHONE varchar
+, @FLAG_CONT_MOBILE varchar
+, @FLAG_PHONE varchar
+, @FLAG_EMAIL varchar
+AS
+BEGIN
+  INSERT INTO [Acceso].[FlagsProvidedInformation] ([SK_ID_CURR]
+  , [FLAG_OWN_CAR]
+  , [FLAG_OWN_REALTY]
+  , [FLAG_MOBIL]
+  , [FLAG_EMP_PHONE]
+  , [FLAG_WORK_PHONE]
+  , [FLAG_CONT_MOBILE]
+  , [FLAG_PHONE]
+  , [FLAG_EMAIL])
+
+    VALUES (@SK_ID_CURR, @FLAG_OWN_CAR, @FLAG_OWN_REALTY, 
+	@FLAG_MOBIL, @FLAG_EMP_PHONE, @FLAG_WORK_PHONE, 
+	@FLAG_CONT_MOBILE, @FLAG_PHONE, @FLAG_EMAIL)
+
+END
+GO
