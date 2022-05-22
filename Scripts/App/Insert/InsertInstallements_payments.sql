@@ -1,14 +1,14 @@
 USE [ProyectoBasesDatos2]
 GO
 DROP PROCEDURE SPInsertInstallmentsPayments;
-CREATE PROCEDURE SPInsertInstallmentsPayments @SK_ID_PREV varchar
-, @SK_ID_CURR varchar
-, @NUM_INSTALMENT_VERSION varchar
-, @NUM_INSTALMENT_NUMBER varchar
-, @DAYS_INSTALMENT varchar
-, @DAYS_ENTRY_PAYMENT varchar
-, @AMT_INSTALMENT varchar
-, @AMT_PAYMENT varchar
+CREATE PROCEDURE SPInsertInstallmentsPayments @SK_ID_PREV varchar(50)
+, @SK_ID_CURR varchar(50)
+, @NUM_INSTALMENT_VERSION varchar(50)
+, @NUM_INSTALMENT_NUMBER varchar(50)
+, @DAYS_INSTALMENT varchar(50)
+, @DAYS_ENTRY_PAYMENT varchar(50)
+, @AMT_INSTALMENT varchar(50)
+, @AMT_PAYMENT varchar(50)
 AS
 BEGIN
   INSERT INTO [Saldos].[installments_payments] ([SK_ID_PREV]

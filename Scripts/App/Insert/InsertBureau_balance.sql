@@ -3,9 +3,9 @@ GO
 
 DROP PROCEDURE SPInsertBureauBalance;
 CREATE PROCEDURE SPInsertBureauBalance 
-			@SK_ID_BUREAU VARCHAR
-           ,@MONTHS_BALANCE VARCHAR
-           ,@STATUS VARCHAR
+			@SK_ID_BUREAU VARCHAR(50)
+           ,@MONTHS_BALANCE VARCHAR(50)
+           ,@STATUS VARCHAR(50)
 AS
 	BEGIN
 	INSERT INTO [Creditos].[bureau_balance]

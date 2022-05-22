@@ -2,15 +2,15 @@ USE [ProyectoBasesDatos2]
 GO
 
 DROP PROCEDURE SPInsertFlagsProvidedInfo;
-CREATE PROCEDURE SPInsertFlagsProvidedInfo @SK_ID_CURR varchar
-, @FLAG_OWN_CAR varchar
-, @FLAG_OWN_REALTY varchar
-, @FLAG_MOBIL varchar
-, @FLAG_EMP_PHONE varchar
-, @FLAG_WORK_PHONE varchar
-, @FLAG_CONT_MOBILE varchar
-, @FLAG_PHONE varchar
-, @FLAG_EMAIL varchar
+CREATE PROCEDURE SPInsertFlagsProvidedInfo @SK_ID_CURR varchar(50)
+, @FLAG_OWN_CAR varchar(50)
+, @FLAG_OWN_REALTY varchar(50)
+, @FLAG_MOBIL varchar(50)
+, @FLAG_EMP_PHONE varchar(50)
+, @FLAG_WORK_PHONE varchar(50)
+, @FLAG_CONT_MOBILE varchar(50)
+, @FLAG_PHONE varchar(50)
+, @FLAG_EMAIL varchar(50)
 AS
 BEGIN
   INSERT INTO [Acceso].[FlagsProvidedInformation] ([SK_ID_CURR]
