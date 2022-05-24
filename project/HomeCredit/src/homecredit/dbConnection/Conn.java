@@ -27,9 +27,7 @@ public class Conn {
         } catch (SQLException ex) {
 
             System.out.println(ex.toString());
-
         }
-
     }
 
     public Connection obtainConnection() {
