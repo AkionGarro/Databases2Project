@@ -76,9 +76,6 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    /*
-            @codigo, @apellido, @direccion, @fecha_nacimiento, @sexo, @cedula
-                     */
                     cstmt.setString("SK_ID_CURR", nextLine[0].toString());
                     cstmt.setString("TARGET", nextLine[1].toString());
                     cstmt.setString("NAME_CONTRACT_TYPE", nextLine[2].toString());
@@ -187,9 +184,6 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    /*
-            @codigo, @apellido, @direccion, @fecha_nacimiento, @sexo, @cedula
-                     */
                     if (!nextLine[44].toString().equals("") && !nextLine[45].toString().equals("")) {
                         cstmt.setString("SK_ID_CURR", nextLine[0].toString());
                         cstmt.setString("APARTMENTS_AVG", nextLine[44].toString());
@@ -289,9 +283,6 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    /*
-            @codigo, @apellido, @direccion, @fecha_nacimiento, @sexo, @cedula
-                     */
                     cstmt.setString("SK_ID_CURR", nextLine[0].toString());
                     cstmt.setString("REGION_RATING_CLIENT", nextLine[30].toString());
                     cstmt.setString("REGION_RATING_CLIENT_W_CITY", nextLine[31].toString());
@@ -369,9 +360,6 @@ public class Migrator {
                             cstmt.execute();
                         }
                     }
-                    /*
-            @codigo, @apellido, @direccion, @fecha_nacimiento, @sexo, @cedula
-                     */
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
@@ -425,9 +413,6 @@ public class Migrator {
                     cstmt.setString("FLAG_EMAIL", nextLine[27].toString());
                     cstmt.execute();
 
-                    /*
-            @codigo, @apellido, @direccion, @fecha_nacimiento, @sexo, @cedula
-                     */
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
@@ -478,14 +463,585 @@ public class Migrator {
 
                     cstmt.execute();
 
-                    /*
-            @codigo, @apellido, @direccion, @fecha_nacimiento, @sexo, @cedula
-                     */
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*---------------------------------------------------Bureau-------------------------------------------------*/
+    public void migrationBureau(Conn connect) {
+
+        /*
+            SPInsertBureau 
+            @SK_ID_BUREAU VARCHAR(50)
+           ,@SK_ID_CURR VARCHAR(50)
+           ,@CREDIT_ACTIVE VARCHAR(50)
+           ,@CREDIT_CURRENCY VARCHAR(50)
+           ,@DAYS_CREDIT VARCHAR(50)
+           ,@CREDIT_DAY_OVERDUE VARCHAR(50)
+           ,@DAYS_CREDIT_ENDDATE VARCHAR(50)
+           ,@DAYS_ENDDATE_FACT VARCHAR(50)
+           ,@CNT_CREDIT_PROLONG VARCHAR(50)
+           ,@CREDIT_TYPE VARCHAR(50)
+           ,@DAYS_CREDIT_UPDATE VARCHAR(50)
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(bureau))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+            int cont = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+                cont++;
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertBureau(?,?,?,?,?,?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+
+                    cstmt.setString("@SK_ID_BUREAU", nextLine[1].toString());
+                    cstmt.setString("@SK_ID_CURR", nextLine[0].toString());
+                    cstmt.setString("CREDIT_ACTIVE", nextLine[2].toString());
+                    cstmt.setString("CREDIT_CURRENCY", nextLine[3].toString());
+                    cstmt.setString("DAYS_CREDIT", nextLine[4].toString());
+                    cstmt.setString("CREDIT_DAY_OVERDUE", nextLine[5].toString());
+                    cstmt.setString("DAYS_CREDIT_ENDDATE", nextLine[6].toString());
+                    cstmt.setString("DAYS_ENDDATE_FACT", nextLine[7].toString());
+                    cstmt.setString("CNT_CREDIT_PROLONG", nextLine[9].toString());
+                    cstmt.setString("CREDIT_TYPE", nextLine[14].toString());
+                    cstmt.setString("DAYS_CREDIT_UPDATE", nextLine[15].toString());
+                    cstmt.execute();
+
+                } catch (Exception ex) {
+                    //JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+            System.out.println(cont);
+        } catch (IOException | CsvValidationException e) {
+            //e.printStackTrace();
+        }
+    }
+
+    public void migrationBureauBalance(Conn connect) {
+
+        /*
+            SPInsertBureauBalance(
+            @SK_ID_BUREAU
+           ,@MONTHS_BALANCE
+           ,@STATUS)
+
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(bureau_balance))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertBureauBalance(?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("SK_ID_BUREAU", nextLine[0].toString());
+                    cstmt.setString("MONTHS_BALANCE", nextLine[1].toString());
+                    cstmt.setString("STATUS", nextLine[2].toString());
+
+                    cstmt.execute();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void migrationAMTCreditDetails(Conn connect) {
+
+        /*
+            SPInsertAMT_CREDIT(
+            @SK_ID_BUREAU
+           ,@MAX_OVERDUE
+           ,@SUM
+           ,@SUM_DEBT
+           ,@SUM_LIMIT
+           ,@SUM_OVERDUE
+           ,@ANNUITY)
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(bureau))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+            int cont = 0;
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+                cont++;
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertAMT_CREDIT(?,?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("SK_ID_BUREAU", nextLine[1].toString());
+                    cstmt.setString("MAX_OVERDUE", nextLine[8].toString());
+                    cstmt.setString("SUM", nextLine[10].toString());
+                    cstmt.setString("SUM_DEBT", nextLine[11].toString());
+                    cstmt.setString("SUM_LIMIT", nextLine[12].toString());
+                    cstmt.setString("SUM_OVERDUE", nextLine[13].toString());
+                    cstmt.setString("ANNUITY", nextLine[16].toString());
+
+                    cstmt.execute();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+            System.out.println(cont);
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*--------------------------------------------Previous App Connections-------------------------------------------------------*/
+    public void migrationPreviousApplication(Conn connect) {
+        /*
+    SPInsertarPreviousApplication(
+        @SK_ID_PREV, 
+        @SK_ID_CURR, 
+        @NAME_CONTRACT_TYPE, 
+	@WEEKDAY_APPR_PROCESS_START, 
+        @HOUR_APPR_PROCESS_START, 
+	@FLAG_LAST_APPL_PER_CONTRACT, 
+        @NFLAG_LAST_APPL_IN_DAY,
+	@RATE_DOWN_PAYMENT, 
+        @RATE_INTEREST_PRIMARY, 
+        @RATE_INTEREST_PRIVILEGED,
+	@NAME_CASH_LOAN_PURPOSE, 
+        @NAME_CONTRACT_STATUS, 
+        @DAYS_DECISION, 
+	@NAME_PAYMENT_TYPE, 
+        @CODE_REJECT_REASON, 
+        @NAME_TYPE_SUITE,
+	@NAME_CLIENT_TYPE, 
+        @NAME_GOODS_CATEGORY, 
+        @NAME_PORTFOLIO, 
+	@NAME_PRODUCT_TYPE, 
+        @CHANNEL_TYPE, 
+        @SELLERPLACE_AREA, 
+	@NAME_SELLER_INDUSTRY, 
+        @CNT_PAYMENT, 
+        @NAME_YIELD_GROUP, 
+	@PRODUCT_COMBINATION, 
+        @DAYS_FIRST_DRAWING, 
+        @DAYS_FIRST_DUE, 
+	@DAYS_LAST_DUE_1ST_VERSION, 
+        @DAYS_LAST_DUE, 
+        @DAYS_TERMINATION, 
+	@NFLAG_INSURED_ON_APPROVAL)
+        
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(previous_application))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                System.out.println(Arrays.toString(nextLine));
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertarPreviousApplication(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+
+                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
+                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setString("NAME_CONTRACT_TYPE", nextLine[2].toString());
+                    cstmt.setString("WEEKDAY_APPR_PROCESS_START", nextLine[8].toString());
+                    cstmt.setString("HOUR_APPR_PROCESS_START", nextLine[9].toString());
+                    cstmt.setString("FLAG_LAST_APPL_PER_CONTRACT", nextLine[10].toString());
+                    cstmt.setString("NFLAG_LAST_APPL_IN_DAY", nextLine[11].toString());
+                    cstmt.setString("RATE_DOWN_PAYMENT", nextLine[12].toString());
+                    cstmt.setString("RATE_INTEREST_PRIMARY", nextLine[13].toString());
+                    cstmt.setString("RATE_INTEREST_PRIVILEGED", nextLine[14].toString());
+                    cstmt.setString("NAME_CASH_LOAN_PURPOSE", nextLine[15].toString());
+                    cstmt.setString("NAME_CONTRACT_STATUS", nextLine[16].toString());
+                    cstmt.setString("DAYS_DECISION", nextLine[17].toString());
+                    cstmt.setString("NAME_PAYMENT_TYPE", nextLine[18].toString());
+                    cstmt.setString("CODE_REJECT_REASON", nextLine[19].toString());
+                    cstmt.setString("NAME_TYPE_SUITE", nextLine[20].toString());
+                    cstmt.setString("NAME_CLIENT_TYPE", nextLine[21].toString());
+                    cstmt.setString("NAME_GOODS_CATEGORY", nextLine[22].toString());
+                    cstmt.setString("NAME_PORTFOLIO", nextLine[23].toString());
+                    cstmt.setString("NAME_PRODUCT_TYPE", nextLine[24].toString());
+                    cstmt.setString("CHANNEL_TYPE", nextLine[25].toString());
+                    cstmt.setString("SELLERPLACE_AREA", nextLine[26].toString());
+                    cstmt.setString("NAME_SELLER_INDUSTRY", nextLine[27].toString());
+                    cstmt.setString("CNT_PAYMENT", nextLine[28].toString());
+                    cstmt.setString("NAME_YIELD_GROUP", nextLine[29].toString());
+                    cstmt.setString("PRODUCT_COMBINATION", nextLine[30].toString());
+                    cstmt.setString("DAYS_FIRST_DRAWING", nextLine[31].toString());
+                    cstmt.setString("DAYS_FIRST_DUE", nextLine[32].toString());
+                    cstmt.setString("DAYS_LAST_DUE_1ST_VERSION", nextLine[33].toString());
+                    cstmt.setString("DAYS_LAST_DUE", nextLine[34].toString());
+                    cstmt.setString("DAYS_TERMINATION", nextLine[35].toString());
+                    cstmt.setString("NFLAG_INSURED_ON_APPROVAL", nextLine[36].toString());
+
+                    cstmt.execute();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+
+                }
+
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*---------------------------------------------------------------------------------------------------------------------------------*/
+    public void migrationPosCashBalance(Conn connect) {
+
+        /*
+    SPInsertPosCashBalance(
+            @SK_ID_PREV
+           ,@SK_ID_CURR
+           ,@MONTHS_BALANCE
+           ,@CNT_INSTALMENT
+           ,@CNT_INSTALMENT_FUTURE
+           ,@NAME_CONTRACT_STATUS
+           ,@SK_DPD
+           ,@SK_DPD_DEF)
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(previous_application))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertPosCashBalance(?,?,?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
+                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setString("MONTHS_BALANCE", nextLine[2].toString());
+                    cstmt.setString("CNT_INSTALMENT", nextLine[3].toString());
+                    cstmt.setString("CNT_INSTALMENT_FUTURE", nextLine[4].toString());
+                    cstmt.setString("NAME_CONTRACT_STATUS", nextLine[5].toString());
+                    cstmt.setString("SK_DPD", nextLine[6].toString());
+                    cstmt.setString("SK_DPD_DEF", nextLine[7].toString());
+
+                    cstmt.execute();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*---------------------------------------------------------------------------------------------------------------------------------*/
+    public void migrationInstallmentsPayments(Conn connect) {
+
+        /*
+                SPInsertInstallmentsPayments(
+                 @SK_ID_PREV, 
+                 @SK_ID_CURR, 
+                 @NUM_INSTALMENT_VERSION, 
+                 @NUM_INSTALMENT_NUMBER, 
+                 @DAYS_INSTALMENT, 
+                 @DAYS_ENTRY_PAYMENT, 
+                 @AMT_INSTALMENT, 
+                 @AMT_PAYMENT)   
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(this.installments_payments))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertInstallmentsPayments(?,?,?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
+                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setString("NUM_INSTALMENT_VERSION", nextLine[2].toString());
+                    cstmt.setString("NUM_INSTALMENT_NUMBER", nextLine[3].toString());
+                    cstmt.setString("DAYS_INSTALMENT", nextLine[4].toString());
+                    cstmt.setString("DAYS_ENTRY_PAYMENT", nextLine[5].toString());
+                    cstmt.setString("AMT_INSTALMENT", nextLine[6].toString());
+                    cstmt.setString("AMT_PAYMENT", nextLine[7].toString());
+
+                    cstmt.execute();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /*---------------------------------------------------------------------------------------------------------------------------------*/
+    public void migrationAMT_PREVIOUS_DETAILS(Conn connect) {
+
+        /*
+            SPInsertAMT_PREVIOUS_DETAILS(
+            @SK_ID_PREV
+           ,@AMT_ANNUITY
+           ,@AMT_APPLICATION
+           ,@AMT_CREDIT
+           ,@AMT_DOWN_PAYMENT
+           ,@AMT_GOODS_PRICE)
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(this.previous_application))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertAMT_PREVIOUS_DETAILS(?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
+                    cstmt.setString("AMT_ANNUITY", nextLine[3].toString());
+                    cstmt.setString("AMT_APPLICATION", nextLine[4].toString());
+                    cstmt.setString("AMT_CREDIT", nextLine[5].toString());
+                    cstmt.setString("AMT_DOWN_PAYMENT", nextLine[6].toString());
+                    cstmt.setString("AMT_GOODS_PRICE", nextLine[7].toString());
+
+                    cstmt.execute();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*---------------------------------------------------------------------------------------------------------------------------------*/
+    public void migrationCreditCardBalance(Conn connect) {
+
+        /*
+            SPInsertCreditCardBalance(
+                    @ID_CCB, 
+                    @SK_ID_PREV, 
+                    @SK_ID_CURR, 
+                    @MONTHS_BALANCE,
+                    @NAME_CONTRACT_STATUS, 
+                    @SK_DPD, 
+                    @SK_DPD_DEF)
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(this.credit_card_balance))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+            int cont = 1;
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertCreditCardBalance(?,?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("ID_CCB", Integer.toString(cont));
+                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
+                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setString("MONTHS_BALANCE", nextLine[2].toString());
+                    cstmt.setString("NAME_CONTRACT_STATUS", nextLine[20].toString());
+                    cstmt.setString("SK_DPD", nextLine[21].toString());
+                    cstmt.setString("SK_DPD_DEF", nextLine[22].toString());
+
+                    cstmt.execute();
+                    cont++;
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void migrationAMT_BALANCE_DETAILS(Conn connect) {
+
+        /*
+            SPInsertAMT_BALANCE_DETAILS(
+            @ID_CCB
+            , @BALANCE
+            , @CREDIT_LIMIT_ACTUAL
+            , @DRAWINGS_ATM_CURRENT
+            , @DRAWINGS_CURRENT
+            , @DRAWINGS_OTHER_CURRENT
+            , @DRAWINGS_POS_CURRENT
+            , @INST_MIN_REGULARITY
+            , @PAYMENT_CURRENT
+            , @PAYMENT_TOTAL_CURRENT
+            , @RECEIVABLE_PRINCIPAL
+            , @RECIVABLE
+            , @TOTAL_RECEIVABLE
+
+    )
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(this.credit_card_balance))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+            int cont = 1;
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertAMT_BALANCE_DETAILS(?,?,?,?,?,?,?,?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("ID_CCB", Integer.toString(cont));
+                    cstmt.setString("BALANCE", nextLine[3].toString());
+                    cstmt.setString("CREDIT_LIMIT_ACTUAL", nextLine[4].toString());
+                    cstmt.setString("DRAWINGS_ATM_CURRENT", nextLine[5].toString());
+                    cstmt.setString("DRAWINGS_CURRENT", nextLine[6].toString());
+                    cstmt.setString("DRAWINGS_OTHER_CURRENT", nextLine[7].toString());
+                    cstmt.setString("DRAWINGS_POS_CURRENT", nextLine[8].toString());
+                    cstmt.setString("INST_MIN_REGULARITY", nextLine[9].toString());
+                    cstmt.setString("PAYMENT_CURRENT", nextLine[10].toString());
+                    cstmt.setString("PAYMENT_TOTAL_CURRENT", nextLine[11].toString());
+                    cstmt.setString("RECEIVABLE_PRINCIPAL", nextLine[12].toString());
+                    cstmt.setString("RECIVABLE", nextLine[13].toString());
+                    cstmt.setString("TOTAL_RECEIVABLE", nextLine[14].toString());
+
+                    cstmt.execute();
+                    cont++;
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void migrationCNTBalanceDetails(Conn connect) {
+
+        /*
+            SPInsertCNTBalanceDetails(
+            @ID_CCB
+            @DRAWINGS_ATM_CURRENT , 
+            @DRAWINGS_CURRENT ,
+            @DRAWINGS_OTHER_CURRENT ,
+            @DRAWINGS_POS_CURRENT ,
+            @INSTALMENT_MATURE_CUM
+
+    )
+
+    )
+            
+         */
+        CallableStatement cstmt = null;
+        try (
+                 CSVReader reader = new CSVReader(new FileReader(this.credit_card_balance))) {
+            String[] nextLine;
+            //Read one line at a time
+            reader.skip(1);
+            int cont = 1;
+            while ((nextLine = reader.readNext()) != null) {
+                //Use the tokens as required
+
+                try {
+                    cstmt = connect.obtainConnection().prepareCall(
+                            "{call dbo.SPInsertCNTBalanceDetails(?,?,?,?,?,?)}",
+                            ResultSet.TYPE_SCROLL_INSENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    cstmt.setString("ID_CCB", Integer.toString(cont));
+                    cstmt.setString("BALANCE", nextLine[15].toString());
+                    cstmt.setString("CREDIT_LIMIT_ACTUAL", nextLine[16].toString());
+                    cstmt.setString("DRAWINGS_ATM_CURRENT", nextLine[17].toString());
+                    cstmt.setString("DRAWINGS_CURRENT", nextLine[18].toString());
+                    cstmt.setString("DRAWINGS_OTHER_CURRENT", nextLine[19].toString());
+
+
+                    cstmt.execute();
+                    cont++;
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.toString());
+                }
+
+            }
+
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
@@ -497,10 +1053,19 @@ public class Migrator {
         //m1.migrationAplicationTrain(conex);
         //m1.migrationClientApartments(conex);
         //m1.migrationAddressClientInformation(conex);
-        //m1.migrationFlagDocument(conex);
+        // m1.migrationFlagDocument(conex);
         //m1.migrationFlagsProvidedInfo(conex);
-        m1.migrationAMTREQCredit(conex);
+        //m1.migrationAMTREQCredit(conex);
+        //m1.migrationBureau(conex);
+        
+        /*-------------------------------------Faltan------------------------*/
 
+        m1.migrationBureauBalance(conex);
+        //m1.migrationAMTCreditDetails(conex);
+        //m1.migrationPreviousApplication(conex);
+        //m1.migrationPosCashBalance(conex);
+        //m1.migrationInstallmentsPayments(conex);
+        //m1.migrationAMT_PREVIOUS_DETAILS(conex);
     }
 
 }

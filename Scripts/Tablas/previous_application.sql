@@ -5,7 +5,6 @@ GO
 CREATE TABLE [previous_application](
 	[SK_ID_PREV] [varchar](50) NOT NULL, /*Agregar la PK*/
 	CONSTRAINT PK_previous_application_SK_ID_PREV PRIMARY KEY CLUSTERED (SK_ID_PREV),
-
 	[SK_ID_CURR] [varchar](50) NULL, /*Agregar la FK*/
 	[NAME_CONTRACT_TYPE] [varchar](50) NULL,
 	[WEEKDAY_APPR_PROCESS_START] [varchar](50) NULL,
@@ -38,10 +37,16 @@ CREATE TABLE [previous_application](
 	[DAYS_TERMINATION] [varchar](50) NULL,
 	[NFLAG_INSURED_ON_APPROVAL] [varchar](50) NULL
 ) 
+TRUNCATE TABLE Saldos.previous_application;
+DELETE FROM Saldos.previous_application;
+
+ALTER TABLE Saldos.previous_application 
+DROP CONSTRAINT FK_previousA_ApplicationT;
 
 ALTER TABLE Saldos.previous_application
    ADD CONSTRAINT FK_previousA_ApplicationT FOREIGN KEY (SK_ID_CURR)
       REFERENCES Acceso.application_train(SK_ID_CURR)
-      ON DELETE CASCADE
-      ON UPDATE CASCADE
+      ON DELETE no action
+      ON UPDATE no action
 ;
+
