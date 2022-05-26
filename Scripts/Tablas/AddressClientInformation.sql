@@ -2,10 +2,9 @@ USE [ProyectoBasesDatos2]
 GO
 
 
-
-CREATE TABLE [AddressClientInformation](
-	[SK_ID_CURR] [varchar](50) NULL, /*Agregar FK*/
-
+DROP TABLE [Acceso].[AddressClientInformation];
+CREATE TABLE [Acceso].[AddressClientInformation](
+	[SK_ID_CURR] INT NULL, /*Agregar FK*/
 	[REGION_RATING_CLIENT] [varchar](50) NULL,
 	[REGION_RATING_CLIENT_W_CITY] [varchar](50) NULL,
 	[WEEKDAY_APPR_PROCESS_START] [varchar](50) NULL,
@@ -26,6 +25,4 @@ CREATE TABLE [AddressClientInformation](
 ALTER TABLE Acceso.AddressClientInformation
    ADD CONSTRAINT FK_AddressClientI_ApplicationT FOREIGN KEY (SK_ID_CURR)
       REFERENCES Acceso.application_train(SK_ID_CURR)
-      ON DELETE no action
-      ON UPDATE no action
 ;

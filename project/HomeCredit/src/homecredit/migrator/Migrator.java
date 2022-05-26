@@ -552,6 +552,10 @@ public class Migrator {
             while ((nextLine = reader.readNext()) != null) {
                 //Use the tokens as required
 
+                for(int i=0;i<3;i++){
+                    System.out.print(nextLine[i]+ " ");
+                }
+                System.out.println(" ");
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertBureauBalance(?,?,?)}",
@@ -565,6 +569,7 @@ public class Migrator {
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
+                    continue;
                 }
 
             }
@@ -1060,8 +1065,8 @@ public class Migrator {
         
         /*-------------------------------------Faltan------------------------*/
 
-        m1.migrationBureauBalance(conex);
-        //m1.migrationAMTCreditDetails(conex);
+       m1.migrationBureauBalance(conex);
+       // m1.migrationAMTCreditDetails(conex);
         //m1.migrationPreviousApplication(conex);
         //m1.migrationPosCashBalance(conex);
         //m1.migrationInstallmentsPayments(conex);

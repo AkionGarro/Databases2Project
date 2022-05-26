@@ -1,10 +1,10 @@
 USE [ProyectoBasesDatos2]
 GO
 
-
+DROP TABLE [Acceso].[application_train];
 CREATE TABLE [application_train](
-	[SK_ID_CURR] [varchar](50) NOT NULL,
-	CONSTRAINT PK_application_train_SK_ID_CURR PRIMARY KEY CLUSTERED (SK_ID_CURR), /*Agregar PK*/
+	[SK_ID_CURR] INT NOT NULL,
+    PRIMARY KEY  (SK_ID_CURR), /*Agregar PK*/
 	[TARGET] [varchar](50) NULL,
 	[NAME_CONTRACT_TYPE] [varchar](50) NULL,
 	[CODE_GENDER] [varchar](50) NULL,

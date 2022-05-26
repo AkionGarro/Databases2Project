@@ -2,10 +2,9 @@ USE [ProyectoBasesDatos2]
 GO
 
 
-
-CREATE TABLE [AMT_REQ_CREDIT](
-	[SK_ID_CURR] [varchar](50) NULL, /*Agregar FK*/
-
+DROP TABLE Acceso.AMT_REQ_CREDIT;
+CREATE TABLE [Acceso].[AMT_REQ_CREDIT](
+	[SK_ID_CURR] INT NULL, /*Agregar FK*/
 	[BUREAU_HOUR] [varchar](50) NULL,
 	[BUREAU_DAY] [varchar](50) NULL,
 	[BUREAU_WEEK] [varchar](50) NULL,
@@ -18,6 +17,4 @@ CREATE TABLE [AMT_REQ_CREDIT](
 ALTER TABLE Acceso.AMT_REQ_CREDIT
    ADD CONSTRAINT FK_AMT_REQ_CREDIT_ApplicationT FOREIGN KEY (SK_ID_CURR)
       REFERENCES Acceso.application_train(SK_ID_CURR)
-      ON DELETE no action
-      ON UPDATE no action
 ;

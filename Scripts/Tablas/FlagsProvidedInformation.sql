@@ -1,8 +1,9 @@
 USE [ProyectoBasesDatos2]
 GO
 
+DROP TABLE Acceso.FlagsProvidedInformation;
 CREATE TABLE [FlagsProvidedInformation](
-	[SK_ID_CURR] [varchar](50) NULL, /*Agregar FK*/
+	[SK_ID_CURR] INT NULL, /*Agregar FK*/
 	[FLAG_OWN_CAR] [varchar](50) NULL,
 	[FLAG_OWN_REALTY] [varchar](50) NULL,
 	[FLAG_MOBIL] [varchar](50) NULL,
@@ -18,7 +19,5 @@ CREATE TABLE [FlagsProvidedInformation](
 ALTER TABLE Acceso.FlagsProvidedInformation
    ADD CONSTRAINT FK_FlagsProvidedInformation_ApplicationT FOREIGN KEY (SK_ID_CURR)
       REFERENCES Acceso.application_train(SK_ID_CURR)
-      ON DELETE no action
-      ON UPDATE no action
 ;
 

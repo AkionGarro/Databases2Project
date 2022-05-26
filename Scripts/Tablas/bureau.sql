@@ -2,7 +2,7 @@ USE [ProyectoBasesDatos2]
 GO
 
 
-drop table Creditos.bureau;
+DROP TABLE Creditos.bureau;
 
 CREATE TABLE [Creditos].[bureau](
 	[SK_ID_BUREAU] [varchar](50) NOT NULL, /*Agregar la PK*/
@@ -28,6 +28,4 @@ DROP CONSTRAINT FK_Bureau_AppTrain;
 ALTER TABLE [Creditos].[bureau]
    ADD CONSTRAINT FK_Bureau_AppTrain FOREIGN KEY (SK_ID_CURR)
       REFERENCES Acceso.application_train(SK_ID_CURR)
-      ON DELETE no action
-      ON UPDATE no action
 ;

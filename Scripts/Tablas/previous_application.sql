@@ -1,11 +1,11 @@
 USE [ProyectoBasesDatos2]
 GO
 
-
-CREATE TABLE [previous_application](
-	[SK_ID_PREV] [varchar](50) NOT NULL, /*Agregar la PK*/
-	CONSTRAINT PK_previous_application_SK_ID_PREV PRIMARY KEY CLUSTERED (SK_ID_PREV),
-	[SK_ID_CURR] [varchar](50) NULL, /*Agregar la FK*/
+Drop table [Saldos].[previous_application];
+CREATE TABLE  [Saldos].[previous_application](
+	[SK_ID_PREV] INT NOT NULL, /*Agregar la PK*/
+	PRIMARY KEY(SK_ID_PREV),
+	[SK_ID_CURR] INT NULL, /*Agregar la FK*/
 	[NAME_CONTRACT_TYPE] [varchar](50) NULL,
 	[WEEKDAY_APPR_PROCESS_START] [varchar](50) NULL,
 	[HOUR_APPR_PROCESS_START] [varchar](50) NULL,
@@ -45,8 +45,5 @@ DROP CONSTRAINT FK_previousA_ApplicationT;
 
 ALTER TABLE Saldos.previous_application
    ADD CONSTRAINT FK_previousA_ApplicationT FOREIGN KEY (SK_ID_CURR)
-      REFERENCES Acceso.application_train(SK_ID_CURR)
-      ON DELETE no action
-      ON UPDATE no action
-;
+      REFERENCES Acceso.application_train(SK_ID_CURR);
 

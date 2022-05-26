@@ -2,7 +2,7 @@ USE [ProyectoBasesDatos2]
 GO
 
 CREATE TABLE [AMT_PREVIOUS_DETAILS](
-	[SK_ID_PREV] [varchar](50) NULL, /*Agregar FK*/
+	[SK_ID_PREV] INT NULL, /*Agregar FK*/
 
 	[AMT_ANNUITY] [varchar](50) NULL,
 	[AMT_APPLICATION] [varchar](50) NULL,
@@ -15,6 +15,4 @@ CREATE TABLE [AMT_PREVIOUS_DETAILS](
 ALTER TABLE Saldos.AMT_PREVIOUS_DETAILS
    ADD CONSTRAINT FK_AMT_PREVIOUS_previousA FOREIGN KEY (SK_ID_PREV)
       REFERENCES Saldos.previous_application(SK_ID_PREV)
-      ON DELETE no action
-      ON UPDATE no action
 ;

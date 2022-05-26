@@ -1,10 +1,10 @@
 USE [ProyectoBasesDatos2]
 GO
 
-
+DROP TABLE Saldos.AMT_BALANCE_DETAILS;
 CREATE TABLE [AMT_BALANCE_DETAILS](
 
-	[ID_CCB]  [varchar](50) NULL, /*Agregar la FK */
+	[ID_CCB]  INT NULL, /*Agregar la FK */
 	[BALANCE] [varchar](50) NULL,
 	[CREDIT_LIMIT_ACTUAL] [varchar](50) NULL,
 	[DRAWINGS_ATM_CURRENT] [varchar](50) NULL,
@@ -23,6 +23,4 @@ CREATE TABLE [AMT_BALANCE_DETAILS](
 ALTER TABLE Saldos.AMT_BALANCE_DETAILS
    ADD CONSTRAINT FK_AMT_BALANCE_Credit_Card FOREIGN KEY (ID_CCB)
       REFERENCES Saldos.credit_card_balance(ID_CCB)
-      ON DELETE no action
-      ON UPDATE no action
 ;

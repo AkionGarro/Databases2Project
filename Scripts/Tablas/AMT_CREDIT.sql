@@ -3,8 +3,8 @@ GO
 
 DROP TABLE [CREDITOS].[AMT_CREDIT];
 CREATE TABLE [CREDITOS].[AMT_CREDIT](
-	[SK_ID_BUREAU] [varchar](50) NULL, /*Agregar la FK*/
-	[MAX_OVERDUE] [varchar](50) NULL,
+	[SK_ID_BUREAU] INT NULL, /*Agregar la FK*/
+	[MAX_OVERDUE] INT NULL,
 	[SUM] [varchar](50) NULL,
 	[SUM_DEBT] [varchar](50) NULL,
 	[SUM_LIMIT] [varchar](50) NULL,
@@ -12,12 +12,12 @@ CREATE TABLE [CREDITOS].[AMT_CREDIT](
 	[ANNUITY] [varchar](50) NULL
 ) 
 ALTER TABLE Creditos.AMT_CREDIT
-drop constraint FK_AMT_CREDIT_bureau;
-truncate table Creditos.AMT_CREDIT;
+drop constraint FK_AMT_CREDIT_Bureau;
+
+Delete from Creditos.AMT_CREDIT;
+
 ALTER TABLE Creditos.AMT_CREDIT
-   ADD CONSTRAINT FK_AMT_CREDIT_bureau FOREIGN KEY (SK_ID_BUREAU)
+   ADD CONSTRAINT FK_AMT_CREDIT_Bureau FOREIGN KEY (SK_ID_BUREAU)
       REFERENCES Creditos.bureau(SK_ID_BUREAU)
-      ON DELETE no action
-      ON UPDATE no action
 ;
 
