@@ -76,7 +76,7 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setString("SK_ID_CURR", nextLine[0].toString());
+                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[0]));
                     cstmt.setString("TARGET", nextLine[1].toString());
                     cstmt.setString("NAME_CONTRACT_TYPE", nextLine[2].toString());
                     cstmt.setString("CODE_GENDER", nextLine[3].toString());
@@ -185,7 +185,7 @@ public class Migrator {
                             ResultSet.CONCUR_READ_ONLY);
 
                     if (!nextLine[44].toString().equals("") && !nextLine[45].toString().equals("")) {
-                        cstmt.setString("SK_ID_CURR", nextLine[0].toString());
+                        cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[0]));
                         cstmt.setString("APARTMENTS_AVG", nextLine[44].toString());
                         cstmt.setString("BASEMENTAREA_AVG", nextLine[45].toString());
                         cstmt.setString("YEARS_BEGINEXPLUATATION_AVG", nextLine[46].toString());
@@ -283,7 +283,7 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setString("SK_ID_CURR", nextLine[0].toString());
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[0]));
                     cstmt.setString("REGION_RATING_CLIENT", nextLine[30].toString());
                     cstmt.setString("REGION_RATING_CLIENT_W_CITY", nextLine[31].toString());
                     cstmt.setString("WEEKDAY_APPR_PROCESS_START", nextLine[32].toString());
@@ -355,7 +355,7 @@ public class Migrator {
 
                     for (int i = 96; i <= 115; i++) {
                         if (nextLine[i].equals("1")) {
-                            cstmt.setString("SK_ID_CURR", nextLine[0].toString());
+                            cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[0]));
                             cstmt.setString("DOCUMENT", nextLine[i].toString());
                             cstmt.execute();
                         }
@@ -402,7 +402,7 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setString("SK_ID_CURR", nextLine[0].toString());
+                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[0]));
                     cstmt.setString("FLAG_OWN_CAR", nextLine[4].toString());
                     cstmt.setString("FLAG_OWN_REALTY", nextLine[5].toString());
                     cstmt.setString("FLAG_MOBIL", nextLine[22].toString());
@@ -453,7 +453,7 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setString("SK_ID_CURR", nextLine[0].toString());
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[0]));
                     cstmt.setString("BUREAU_HOUR", nextLine[116].toString());
                     cstmt.setString("BUREAU_DAY", nextLine[117].toString());
                     cstmt.setString("BUREAU_WEEK", nextLine[118].toString());
@@ -508,8 +508,8 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setString("@SK_ID_BUREAU", nextLine[1].toString());
-                    cstmt.setString("@SK_ID_CURR", nextLine[0].toString());
+                    cstmt.setInt("SK_ID_BUREAU", Integer.parseInt(nextLine[1]));
+                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[0]));
                     cstmt.setString("CREDIT_ACTIVE", nextLine[2].toString());
                     cstmt.setString("CREDIT_CURRENCY", nextLine[3].toString());
                     cstmt.setString("DAYS_CREDIT", nextLine[4].toString());
@@ -561,7 +561,7 @@ public class Migrator {
                             "{call dbo.SPInsertBureauBalance(?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("SK_ID_BUREAU", nextLine[0].toString());
+                    cstmt.setInt("SK_ID_BUREAU", Integer.parseInt(nextLine[0]));
                     cstmt.setString("MONTHS_BALANCE", nextLine[1].toString());
                     cstmt.setString("STATUS", nextLine[2].toString());
 
@@ -608,7 +608,7 @@ public class Migrator {
                             "{call dbo.SPInsertAMT_CREDIT(?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("SK_ID_BUREAU", nextLine[1].toString());
+                    cstmt.setInt("SK_ID_BUREAU", Integer.parseInt(nextLine[1]));
                     cstmt.setString("MAX_OVERDUE", nextLine[8].toString());
                     cstmt.setString("SUM", nextLine[10].toString());
                     cstmt.setString("SUM_DEBT", nextLine[11].toString());
@@ -684,8 +684,8 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
-                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setInt("SK_ID_PREV", Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[1]));
                     cstmt.setString("NAME_CONTRACT_TYPE", nextLine[2].toString());
                     cstmt.setString("WEEKDAY_APPR_PROCESS_START", nextLine[8].toString());
                     cstmt.setString("HOUR_APPR_PROCESS_START", nextLine[9].toString());
@@ -761,8 +761,8 @@ public class Migrator {
                             "{call dbo.SPInsertPosCashBalance(?,?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
-                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setInt("SK_ID_PREV",Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[1]));
                     cstmt.setString("MONTHS_BALANCE", nextLine[2].toString());
                     cstmt.setString("CNT_INSTALMENT", nextLine[3].toString());
                     cstmt.setString("CNT_INSTALMENT_FUTURE", nextLine[4].toString());
@@ -813,8 +813,8 @@ public class Migrator {
                             "{call dbo.SPInsertInstallmentsPayments(?,?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
-                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setInt("SK_ID_PREV", Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[1]));
                     cstmt.setString("NUM_INSTALMENT_VERSION", nextLine[2].toString());
                     cstmt.setString("NUM_INSTALMENT_NUMBER", nextLine[3].toString());
                     cstmt.setString("DAYS_INSTALMENT", nextLine[4].toString());
@@ -864,7 +864,7 @@ public class Migrator {
                             "{call dbo.SPInsertAMT_PREVIOUS_DETAILS(?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
+                    cstmt.setInt("SK_ID_PREV",Integer.parseInt(nextLine[0]));
                     cstmt.setString("AMT_ANNUITY", nextLine[3].toString());
                     cstmt.setString("AMT_APPLICATION", nextLine[4].toString());
                     cstmt.setString("AMT_CREDIT", nextLine[5].toString());
@@ -913,9 +913,9 @@ public class Migrator {
                             "{call dbo.SPInsertCreditCardBalance(?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("ID_CCB", Integer.toString(cont));
-                    cstmt.setString("SK_ID_PREV", nextLine[0].toString());
-                    cstmt.setString("SK_ID_CURR", nextLine[1].toString());
+                    cstmt.setInt("ID_CCB", cont);
+                    cstmt.setInt("SK_ID_PREV", Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[1]));
                     cstmt.setString("MONTHS_BALANCE", nextLine[2].toString());
                     cstmt.setString("NAME_CONTRACT_STATUS", nextLine[20].toString());
                     cstmt.setString("SK_DPD", nextLine[21].toString());
@@ -971,7 +971,7 @@ public class Migrator {
                             "{call dbo.SPInsertAMT_BALANCE_DETAILS(?,?,?,?,?,?,?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("ID_CCB", Integer.toString(cont));
+                    cstmt.setInt("ID_CCB", cont);
                     cstmt.setString("BALANCE", nextLine[3].toString());
                     cstmt.setString("CREDIT_LIMIT_ACTUAL", nextLine[4].toString());
                     cstmt.setString("DRAWINGS_ATM_CURRENT", nextLine[5].toString());
@@ -1030,7 +1030,7 @@ public class Migrator {
                             "{call dbo.SPInsertCNTBalanceDetails(?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setString("ID_CCB", Integer.toString(cont));
+                    cstmt.setInt("ID_CCB", cont);
                     cstmt.setString("BALANCE", nextLine[15].toString());
                     cstmt.setString("CREDIT_LIMIT_ACTUAL", nextLine[16].toString());
                     cstmt.setString("DRAWINGS_ATM_CURRENT", nextLine[17].toString());
