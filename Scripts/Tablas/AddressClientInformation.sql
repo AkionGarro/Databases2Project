@@ -22,6 +22,12 @@ CREATE TABLE [Acceso].[AddressClientInformation](
 	
 ) 
 
+TRUNCATE TABLE Acceso.AddressClientInformation;
+DELETE FROM Acceso.AddressClientInformation;
+
+ALTER TABLE Acceso.AddressClientInformation
+DROP CONSTRAINT FK_AddressClientI_ApplicationT;
+
 ALTER TABLE Acceso.AddressClientInformation
    ADD CONSTRAINT FK_AddressClientI_ApplicationT FOREIGN KEY (SK_ID_CURR)
       REFERENCES Acceso.application_train(SK_ID_CURR)

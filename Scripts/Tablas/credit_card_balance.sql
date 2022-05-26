@@ -1,8 +1,8 @@
 USE [ProyectoBasesDatos2]
 GO
 
-DROP TABLE Saldos.credit_card_balance;
-CREATE TABLE [credit_card_balance](
+DROP TABLE [Saldos].[credit_card_balance];
+CREATE TABLE [Saldos].[credit_card_balance](
 	[ID_CCB]  INT NOT NULL, /*Agregar la PK*/
 	PRIMARY KEY(ID_CCB),
 	[SK_ID_PREV] INT NULL, /*Agregar la FK*/
@@ -13,6 +13,16 @@ CREATE TABLE [credit_card_balance](
 	[SK_DPD_DEF] [varchar](50) NULL
 	
 ) 
+
+TRUNCATE TABLE Saldos.credit_card_balance;
+DELETE FROM Saldos.credit_card_balance;
+
+
+ALTER TABLE Saldos.credit_card_balance
+DROP CONSTRAINT FK_credit_card_previousA;
+
+ALTER TABLE Saldos.credit_card_balance
+DROP CONSTRAINT FK_credit_card_ApplicationT;
 
 ALTER TABLE Saldos.credit_card_balance
    ADD CONSTRAINT FK_credit_card_previousA FOREIGN KEY (SK_ID_PREV)

@@ -1,8 +1,8 @@
 USE [ProyectoBasesDatos2]
 GO
 
-DROP TABLE Saldos.installments_payments;
-CREATE TABLE [installments_payments](
+DROP TABLE [Saldos].[installments_payments];
+CREATE TABLE  [Saldos].[installments_payments](
 	[SK_ID_PREV] INT NULL, /*Agregar la FK*/
 	[SK_ID_CURR] INT NULL, /*Agregar la FK*/
 	[NUM_INSTALMENT_VERSION] [varchar](50) NULL,
@@ -12,6 +12,17 @@ CREATE TABLE [installments_payments](
 	[AMT_INSTALMENT] [varchar](50) NULL,
 	[AMT_PAYMENT] [varchar](50) NULL
 ) 
+
+TRUNCATE TABLE Saldos.installments_payments;
+DELETE FROM Saldos.installments_payments;
+
+
+ALTER TABLE Saldos.installments_payments 
+DROP CONSTRAINT FK_installments_payments_previousA;
+
+ALTER TABLE Saldos.installments_payments 
+DROP CONSTRAINT FK_installments_payments_ApplicationT;
+
 
 ALTER TABLE Saldos.installments_payments
    ADD CONSTRAINT FK_installments_payments_previousA FOREIGN KEY (SK_ID_PREV)

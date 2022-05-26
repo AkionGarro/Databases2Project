@@ -2,8 +2,8 @@ USE [ProyectoBasesDatos2]
 GO
 
 DROP  TABLE Creditos.bureau_balance;
-CREATE TABLE Creditos.[bureau_balance](
-	[SK_ID_BUREAU] [varchar](50) NULL,/*Agregar la FK*/
+CREATE TABLE [Creditos].[bureau_balance](
+	[SK_ID_BUREAU] INT NULL,/*Agregar la FK*/
 	[MONTHS_BALANCE] [varchar](50) NULL,
 	[STATUS] [varchar](50) NULL
 ) 

@@ -1,8 +1,8 @@
 USE [ProyectoBasesDatos2]
 GO
 
-DROP TABLE Acceso.FlagsProvidedInformation;
-CREATE TABLE [FlagsProvidedInformation](
+DROP TABLE [Acceso].[FlagsProvidedInformation];
+CREATE TABLE [Acceso].[FlagsProvidedInformation](
 	[SK_ID_CURR] INT NULL, /*Agregar FK*/
 	[FLAG_OWN_CAR] [varchar](50) NULL,
 	[FLAG_OWN_REALTY] [varchar](50) NULL,
@@ -14,6 +14,13 @@ CREATE TABLE [FlagsProvidedInformation](
 	[FLAG_EMAIL] [varchar](50) NULL,
 
 ) 
+
+TRUNCATE TABLE Acceso.FlagsProvidedInformation;
+DELETE FROM Acceso.FlagsProvidedInformation;
+
+
+ALTER TABLE Acceso.FlagsProvidedInformation
+DROP CONSTRAINT FK_FlagsProvidedInformation_ApplicationT;
 
 
 ALTER TABLE Acceso.FlagsProvidedInformation

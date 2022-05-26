@@ -5,9 +5,9 @@ GO
 DROP TABLE Creditos.bureau;
 
 CREATE TABLE [Creditos].[bureau](
-	[SK_ID_BUREAU] [varchar](50) NOT NULL, /*Agregar la PK*/
-	CONSTRAINT PK_bureau_SK_ID_BUREAU PRIMARY KEY CLUSTERED (SK_ID_BUREAU),
-	[SK_ID_CURR] [varchar](50) NULL, /*Agregar la FK*/
+	[SK_ID_BUREAU] INT NOT NULL, /*Agregar la PK*/
+	PRIMARY KEY (SK_ID_BUREAU),
+	[SK_ID_CURR] INT NULL, /*Agregar la FK*/
 	[CREDIT_ACTIVE] [varchar](50) NULL,
 	[CREDIT_CURRENCY] [varchar](50) NULL,
 	[DAYS_CREDIT] [varchar](50) NULL,
@@ -20,6 +20,9 @@ CREATE TABLE [Creditos].[bureau](
 
 )
 
+
+
+DELETE FROM CREDITOS.BUREAU;
 truncate table Creditos.bureau;
 
 ALTER TABLE   Creditos.bureau

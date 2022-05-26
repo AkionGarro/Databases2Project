@@ -2,8 +2,8 @@ USE [ProyectoBasesDatos2]
 GO
 
 
-DROP TABLE Acceso.ClientApartmentsDetails;
-CREATE TABLE [ClientApartmentsDetails](
+DROP TABLE [Acceso].[ClientApartmentsDetails];
+CREATE TABLE [Acceso].[ClientApartmentsDetails](
 	[SK_ID_CURR] INT NULL, /*Agregar FK*/
 	[APARTMENTS_AVG] [varchar](50) NULL,
 	[BASEMENTAREA_AVG] [varchar](50) NULL,
@@ -53,6 +53,14 @@ CREATE TABLE [ClientApartmentsDetails](
 	[WALLSMATERIAL_MODE] [varchar](50) NULL,
 	[EMERGENCYSTATE_MODE] [varchar](50) NULL,
 ) 
+
+
+TRUNCATE TABLE Acceso.ClientApartmentsDetails;
+DELETE FROM Acceso.ClientApartmentsDetails;
+
+
+ALTER TABLE Acceso.ClientApartmentsDetails
+DROP CONSTRAINT FK_ClientApartments_ApplicationT;
 
 ALTER TABLE Acceso.ClientApartmentsDetails
    ADD CONSTRAINT FK_ClientApartments_ApplicationT FOREIGN KEY (SK_ID_CURR)

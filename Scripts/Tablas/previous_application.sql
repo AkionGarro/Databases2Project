@@ -1,7 +1,7 @@
 USE [ProyectoBasesDatos2]
 GO
 
-Drop table [Saldos].[previous_application];
+Drop TABLE [Saldos].[previous_application];
 CREATE TABLE  [Saldos].[previous_application](
 	[SK_ID_PREV] INT NOT NULL, /*Agregar la PK*/
 	PRIMARY KEY(SK_ID_PREV),
@@ -37,6 +37,7 @@ CREATE TABLE  [Saldos].[previous_application](
 	[DAYS_TERMINATION] [varchar](50) NULL,
 	[NFLAG_INSURED_ON_APPROVAL] [varchar](50) NULL
 ) 
+
 TRUNCATE TABLE Saldos.previous_application;
 DELETE FROM Saldos.previous_application;
 
