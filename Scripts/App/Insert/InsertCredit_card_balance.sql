@@ -2,7 +2,8 @@ USE [ProyectoBasesDatos2]
 GO
 
 DROP PROCEDURE SPInsertCreditCardBalance;
-CREATE PROCEDURE SPInsertCreditCardBalance @ID_CCB INT
+CREATE PROCEDURE SPInsertCreditCardBalance 
+@ID_CCB INT
 , @SK_ID_PREV INT
 , @SK_ID_CURR INT
 , @MONTHS_BALANCE varchar(50)

@@ -2,7 +2,8 @@ USE [ProyectoBasesDatos2]
 GO
 
 DROP PROCEDURE SPInsertCNTBalanceDetails;
-CREATE PROCEDURE SPInsertCNTBalanceDetails @ID_CCB INT
+CREATE PROCEDURE SPInsertCNTBalanceDetails 
+@ID_CCB INT
 , @DRAWINGS_ATM_CURRENT varchar(50)
 , @DRAWINGS_CURRENT varchar(50)
 , @DRAWINGS_OTHER_CURRENT varchar(50)

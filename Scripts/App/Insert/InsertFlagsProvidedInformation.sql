@@ -2,7 +2,8 @@ USE [ProyectoBasesDatos2]
 GO
 
 DROP PROCEDURE SPInsertFlagsProvidedInfo;
-CREATE PROCEDURE SPInsertFlagsProvidedInfo @SK_ID_CURR INT
+CREATE PROCEDURE SPInsertFlagsProvidedInfo 
+@SK_ID_CURR INT
 , @FLAG_OWN_CAR varchar(50)
 , @FLAG_OWN_REALTY varchar(50)
 , @FLAG_MOBIL varchar(50)

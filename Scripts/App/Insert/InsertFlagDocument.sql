@@ -2,7 +2,8 @@ USE [ProyectoBasesDatos2]
 GO
 
 DROP PROCEDURE SPInsertFlagDocument;
-CREATE PROCEDURE SPInsertFlagDocument @SK_ID_CURR INT
+CREATE PROCEDURE SPInsertFlagDocument 
+@SK_ID_CURR INT
 , @DOCUMENT varchar(50)
 AS
 BEGIN

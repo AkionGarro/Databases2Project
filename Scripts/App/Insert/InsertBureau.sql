@@ -2,7 +2,8 @@ USE [ProyectoBasesDatos2]
 GO
 
 DROP PROCEDURE SPInsertBureau;
-CREATE PROCEDURE SPInsertBureau @SK_ID_BUREAU INT
+CREATE PROCEDURE SPInsertBureau 
+			@SK_ID_BUREAU INT
            ,@SK_ID_CURR INT
            ,@CREDIT_ACTIVE VARCHAR(50)
            ,@CREDIT_CURRENCY VARCHAR(50)
