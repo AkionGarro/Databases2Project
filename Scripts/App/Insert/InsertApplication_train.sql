@@ -3,7 +3,7 @@ GO
 
 DROP PROCEDURE SPInsertApplication_train;
 CREATE PROCEDURE SPInsertApplication_train 
-			@SK_ID_CURR VARCHAR(50)
+			@SK_ID_CURR INT
            ,@TARGET VARCHAR(50)
            ,@NAME_CONTRACT_TYPE VARCHAR(50)
            ,@CODE_GENDER VARCHAR(50)

@@ -3,8 +3,9 @@ GO
 
 
 DROP PROCEDURE SPInsertarPreviousApplication;
-CREATE PROCEDURE SPInsertarPreviousApplication @SK_ID_PREV varchar(50)
-, @SK_ID_CURR varchar(50)
+CREATE PROCEDURE SPInsertarPreviousApplication 
+  @SK_ID_PREV INT
+, @SK_ID_CURR INT
 , @NAME_CONTRACT_TYPE varchar(50)
 , @WEEKDAY_APPR_PROCESS_START varchar(50)
 , @HOUR_APPR_PROCESS_START varchar(50)

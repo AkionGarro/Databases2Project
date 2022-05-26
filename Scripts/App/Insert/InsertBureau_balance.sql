@@ -3,7 +3,7 @@ GO
 
 DROP PROCEDURE SPInsertBureauBalance;
 CREATE PROCEDURE SPInsertBureauBalance 
-			@SK_ID_BUREAU VARCHAR(50)
+			@SK_ID_BUREAU INT
            ,@MONTHS_BALANCE VARCHAR(50)
            ,@STATUS VARCHAR(50)
 AS

@@ -4,8 +4,8 @@ GO
 
 DROP PROCEDURE SPInsertPosCashBalance;
 CREATE PROCEDURE SPInsertPosCashBalance  
-  		@SK_ID_PREV VARCHAR(50)
-           ,@SK_ID_CURR VARCHAR(50)
+  		@SK_ID_PREV INT
+           ,@SK_ID_CURR INT
            ,@MONTHS_BALANCE VARCHAR(50)
            ,@CNT_INSTALMENT VARCHAR(50)
            ,@CNT_INSTALMENT_FUTURE VARCHAR(50)

@@ -1,8 +1,8 @@
 USE [ProyectoBasesDatos2]
 GO
 DROP PROCEDURE SPInsertInstallmentsPayments;
-CREATE PROCEDURE SPInsertInstallmentsPayments @SK_ID_PREV varchar(50)
-, @SK_ID_CURR varchar(50)
+CREATE PROCEDURE SPInsertInstallmentsPayments @SK_ID_PREV INT
+, @SK_ID_CURR INT
 , @NUM_INSTALMENT_VERSION varchar(50)
 , @NUM_INSTALMENT_NUMBER varchar(50)
 , @DAYS_INSTALMENT varchar(50)
