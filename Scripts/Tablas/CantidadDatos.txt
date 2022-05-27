@@ -1,0 +1,9 @@
+Cantidad de datos:
+
+[application_train] = 307511
+[bureau] = 1716428
+[bureau_balance] = 27299925
+[credit_card_balance] =3840312
+[POS_CASH_balance] =10001358
+[installments_payments]= 13605401
+[previous_application] = 1670214

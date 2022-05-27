@@ -29,6 +29,12 @@ public class Migrator {
     final String POS_CASH_balance = dataset + "\\POS_CASH_balance.csv";
     final String previous_application = dataset + "\\previous_application.csv";
 
+    /**
+     * *
+     * Migration of the Aplication Train CSV File.
+     *
+     * * @param connect The Connection object of the Database
+     */
     public void migrationAplicationTrain(Conn connect) {
 
         /*SPInsertApplication_train(
@@ -65,10 +71,8 @@ public class Migrator {
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
             String[] nextLine;
-            //Read one line at a time
             reader.skip(1);
             while ((nextLine = reader.readNext()) != null) {
-                //Use the tokens as required
 
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
@@ -76,7 +80,7 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[0]));
                     cstmt.setString("TARGET", nextLine[1].toString());
                     cstmt.setString("NAME_CONTRACT_TYPE", nextLine[2].toString());
                     cstmt.setString("CODE_GENDER", nextLine[3].toString());
@@ -103,19 +107,23 @@ public class Migrator {
                     cstmt.setString("OBS_60_CNT_SOCIAL_CIRCLE", nextLine[93].toString());
                     cstmt.setString("DEF_60_CNT_SOCIAL_CIRCLE", nextLine[94].toString());
                     cstmt.setString("DAYS_LAST_PHONE_CHANGE", nextLine[95].toString());
-
                     cstmt.execute();
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
-
             }
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * *
+     * Migration of the ClientApartments datao of the CSV File.
+     *
+     * * @param connect The Connection object of the Database
+     */
     public void migrationClientApartments(Conn connect) {
 
         /*SPInsertClientApartmentsDetails(
@@ -173,10 +181,8 @@ public class Migrator {
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
             String[] nextLine;
-            //Read one line at a time
             reader.skip(1);
             while ((nextLine = reader.readNext()) != null) {
-                //Use the tokens as required
 
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
@@ -233,21 +239,24 @@ public class Migrator {
                         cstmt.setString("TOTALAREA_MODE", nextLine[88].toString());
                         cstmt.setString("WALLSMATERIAL_MODE", nextLine[89].toString());
                         cstmt.setString("EMERGENCYSTATE_MODE", nextLine[90].toString());
-
                         cstmt.execute();
-
                     }
-
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
-
             }
+            System.out.println("Terminado Clients Apartments");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * *
+     * Migration of the Address Client Information of the CSV File.
+     *
+     * * @param connect The Connection object of the Database
+     */
     public void migrationAddressClientInformation(Conn connect) {
 
         /*
@@ -272,11 +281,8 @@ public class Migrator {
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
             String[] nextLine;
-            //Read one line at a time
             reader.skip(1);
             while ((nextLine = reader.readNext()) != null) {
-                //Use the tokens as required
-
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertAddressClientInformation(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}",
@@ -298,25 +304,28 @@ public class Migrator {
                     cstmt.setString("EXT_SOURCE_1", nextLine[41].toString());
                     cstmt.setString("EXT_SOURCE_2", nextLine[42].toString());
                     cstmt.setString("EXT_SOURCE_3", nextLine[43].toString());
-
                     cstmt.execute();
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.toString());
                 }
-
             }
+            System.out.println("Terminado AddressClientInformation");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * *
+     * Migration of the FlagDocument of the CSV File.
+     *
+     * * @param connect The Connection object of the Database
+     */
     public void migrationFlagDocument(Conn connect) {
 
         /*
-                SPInsertFlagDocument(@SK_ID_CURR, @DOCUMENT)
-         
-        
+        SPInsertFlagDocument(@SK_ID_CURR, @DOCUMENT)
         96: "FLAG_DOCUMENT_2"
         97: "FLAG_DOCUMENT_3"
         98: "FLAG_DOCUMENT_4"
@@ -342,11 +351,8 @@ public class Migrator {
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
             String[] nextLine;
-            //Read one line at a time
             reader.skip(1);
             while ((nextLine = reader.readNext()) != null) {
-                //Use the tokens as required
-
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertFlagDocument(?,?)}",
@@ -366,16 +372,22 @@ public class Migrator {
                 }
 
             }
+            System.out.println("Terminado FlagsDocument");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * *
+     * Migration of the Flags Provided Info of the CSV File.
+     *
+     * * @param connect The Connection object of the Database
+     */
     public void migrationFlagsProvidedInfo(Conn connect) {
 
         /*
-        SPInsertFlagsProvidedInfo(
-            
+        SPInsertFlagsProvidedInfo( 
         @SK_ID_CURR, 
         @FLAG_OWN_CAR, [4]
         @FLAG_OWN_REALTY,  [5]
@@ -391,18 +403,15 @@ public class Migrator {
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
             String[] nextLine;
-            //Read one line at a time
             reader.skip(1);
             while ((nextLine = reader.readNext()) != null) {
-                //Use the tokens as required
-
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertFlagsProvidedInfo(?,?,?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
 
-                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[0]));
                     cstmt.setString("FLAG_OWN_CAR", nextLine[4].toString());
                     cstmt.setString("FLAG_OWN_REALTY", nextLine[5].toString());
                     cstmt.setString("FLAG_MOBIL", nextLine[22].toString());
@@ -418,6 +427,7 @@ public class Migrator {
                 }
 
             }
+            System.out.println("Terminado Flags Provided");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
@@ -468,6 +478,7 @@ public class Migrator {
                 }
 
             }
+            System.out.println("Terminado REQ Credit");
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
@@ -509,7 +520,7 @@ public class Migrator {
                             ResultSet.CONCUR_READ_ONLY);
 
                     cstmt.setInt("SK_ID_BUREAU", Integer.parseInt(nextLine[1]));
-                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[0]));
                     cstmt.setString("CREDIT_ACTIVE", nextLine[2].toString());
                     cstmt.setString("CREDIT_CURRENCY", nextLine[3].toString());
                     cstmt.setString("DAYS_CREDIT", nextLine[4].toString());
@@ -546,16 +557,11 @@ public class Migrator {
         try (
                  CSVReader reader = new CSVReader(new FileReader(bureau_balance))) {
             String[] nextLine;
-            //Read one line at a time
+
             reader.skip(1);
 
             while ((nextLine = reader.readNext()) != null) {
-                //Use the tokens as required
 
-                for(int i=0;i<3;i++){
-                    System.out.print(nextLine[i]+ " ");
-                }
-                System.out.println(" ");
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertBureauBalance(?,?,?)}",
@@ -568,14 +574,13 @@ public class Migrator {
                     cstmt.execute();
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
-                    continue;
+
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -598,11 +603,10 @@ public class Migrator {
             String[] nextLine;
             //Read one line at a time
             reader.skip(1);
-            int cont = 0;
             while ((nextLine = reader.readNext()) != null) {
                 //Use the tokens as required
-                cont++;
 
+                System.out.println(Arrays.toString(nextLine));
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertAMT_CREDIT(?,?,?,?,?,?,?)}",
@@ -619,13 +623,13 @@ public class Migrator {
                     cstmt.execute();
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    //JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
-            System.out.println(cont);
+
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -675,9 +679,7 @@ public class Migrator {
             reader.skip(1);
 
             while ((nextLine = reader.readNext()) != null) {
-                //Use the tokens as required
 
-                System.out.println(Arrays.toString(nextLine));
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertarPreviousApplication(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}",
@@ -720,14 +722,14 @@ public class Migrator {
                     cstmt.execute();
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    //JOptionPane.showMessageDialog(null, ex.toString());
 
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -761,7 +763,7 @@ public class Migrator {
                             "{call dbo.SPInsertPosCashBalance(?,?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setInt("SK_ID_PREV",Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_PREV", Integer.parseInt(nextLine[0]));
                     cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[1]));
                     cstmt.setString("MONTHS_BALANCE", nextLine[2].toString());
                     cstmt.setString("CNT_INSTALMENT", nextLine[3].toString());
@@ -773,13 +775,13 @@ public class Migrator {
                     cstmt.execute();
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    //JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -814,7 +816,7 @@ public class Migrator {
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
                     cstmt.setInt("SK_ID_PREV", Integer.parseInt(nextLine[0]));
-                    cstmt.setInt("SK_ID_CURR",Integer.parseInt(nextLine[1]));
+                    cstmt.setInt("SK_ID_CURR", Integer.parseInt(nextLine[1]));
                     cstmt.setString("NUM_INSTALMENT_VERSION", nextLine[2].toString());
                     cstmt.setString("NUM_INSTALMENT_NUMBER", nextLine[3].toString());
                     cstmt.setString("DAYS_INSTALMENT", nextLine[4].toString());
@@ -825,13 +827,13 @@ public class Migrator {
                     cstmt.execute();
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    //JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -864,7 +866,7 @@ public class Migrator {
                             "{call dbo.SPInsertAMT_PREVIOUS_DETAILS(?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setInt("SK_ID_PREV",Integer.parseInt(nextLine[0]));
+                    cstmt.setInt("SK_ID_PREV", Integer.parseInt(nextLine[0]));
                     cstmt.setString("AMT_ANNUITY", nextLine[3].toString());
                     cstmt.setString("AMT_APPLICATION", nextLine[4].toString());
                     cstmt.setString("AMT_CREDIT", nextLine[5].toString());
@@ -874,13 +876,13 @@ public class Migrator {
                     cstmt.execute();
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    // JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -925,13 +927,13 @@ public class Migrator {
                     cont++;
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    // JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -989,13 +991,13 @@ public class Migrator {
                     cont++;
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    // JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -1037,40 +1039,41 @@ public class Migrator {
                     cstmt.setString("DRAWINGS_CURRENT", nextLine[18].toString());
                     cstmt.setString("DRAWINGS_OTHER_CURRENT", nextLine[19].toString());
 
-
                     cstmt.execute();
                     cont++;
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, ex.toString());
+                    // JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
         Conn conex = new Conn();
         Migrator m1 = new Migrator();
+
         //m1.migrationAplicationTrain(conex);
         //m1.migrationClientApartments(conex);
         //m1.migrationAddressClientInformation(conex);
-        // m1.migrationFlagDocument(conex);
+        //m1.migrationFlagDocument(conex);
         //m1.migrationFlagsProvidedInfo(conex);
         //m1.migrationAMTREQCredit(conex);
         //m1.migrationBureau(conex);
-        
-        /*-------------------------------------Faltan------------------------*/
-
-       m1.migrationBureauBalance(conex);
-       // m1.migrationAMTCreditDetails(conex);
+        //m1.migrationBureauBalance(conex);
+        //m1.migrationAMTCreditDetails(conex);
         //m1.migrationPreviousApplication(conex);
         //m1.migrationPosCashBalance(conex);
         //m1.migrationInstallmentsPayments(conex);
         //m1.migrationAMT_PREVIOUS_DETAILS(conex);
+        /*-------------------------------------Faltan------------------------*/
+        m1.migrationCreditCardBalance(conex); 
+        m1.migrationAMT_BALANCE_DETAILS(conex);
+        m1.migrationCNTBalanceDetails(conex);
     }
 
 }
