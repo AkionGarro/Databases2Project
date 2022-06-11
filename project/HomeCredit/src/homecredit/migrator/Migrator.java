@@ -964,7 +964,7 @@ public class Migrator {
             String[] nextLine;
             //Read one line at a time
             reader.skip(1);
-            int cont = 1;
+            int contador = 1;
             while ((nextLine = reader.readNext()) != null) {
                 //Use the tokens as required
 
@@ -973,7 +973,7 @@ public class Migrator {
                             "{call dbo.SPInsertAMT_BALANCE_DETAILS(?,?,?,?,?,?,?,?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setInt("ID_CCB", cont);
+                    cstmt.setInt("ID_CCB", contador);
                     cstmt.setString("BALANCE", nextLine[3].toString());
                     cstmt.setString("CREDIT_LIMIT_ACTUAL", nextLine[4].toString());
                     cstmt.setString("DRAWINGS_ATM_CURRENT", nextLine[5].toString());
@@ -988,16 +988,16 @@ public class Migrator {
                     cstmt.setString("TOTAL_RECEIVABLE", nextLine[14].toString());
 
                     cstmt.execute();
-                    cont++;
+                    contador++;
 
                 } catch (Exception ex) {
-                    // JOptionPane.showMessageDialog(null, ex.toString());
+                    //JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            // e.printStackTrace();
+             //e.printStackTrace();
         }
     }
 
@@ -1022,34 +1022,35 @@ public class Migrator {
                  CSVReader reader = new CSVReader(new FileReader(this.credit_card_balance))) {
             String[] nextLine;
             //Read one line at a time
-            reader.skip(1);
-            int cont = 1;
+            reader.skip(2354994);
+            int conta = 2354994;
             while ((nextLine = reader.readNext()) != null) {
                 //Use the tokens as required
-
+               
+                System.out.println(conta);
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
                             "{call dbo.SPInsertCNTBalanceDetails(?,?,?,?,?,?)}",
                             ResultSet.TYPE_SCROLL_INSENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    cstmt.setInt("ID_CCB", cont);
-                    cstmt.setString("BALANCE", nextLine[15].toString());
-                    cstmt.setString("CREDIT_LIMIT_ACTUAL", nextLine[16].toString());
-                    cstmt.setString("DRAWINGS_ATM_CURRENT", nextLine[17].toString());
-                    cstmt.setString("DRAWINGS_CURRENT", nextLine[18].toString());
-                    cstmt.setString("DRAWINGS_OTHER_CURRENT", nextLine[19].toString());
+                    cstmt.setInt("ID_CCB", conta);
+                    cstmt.setString("DRAWINGS_ATM_CURRENT", nextLine[15].toString());
+                    cstmt.setString("DRAWINGS_CURRENT", nextLine[16].toString());
+                    cstmt.setString("DRAWINGS_OTHER_CURRENT", nextLine[17].toString());
+                    cstmt.setString("DRAWINGS_POS_CURRENT", nextLine[18].toString());
+                    cstmt.setString("INSTALMENT_MATURE_CUM", nextLine[19].toString());
 
                     cstmt.execute();
-                    cont++;
+                    conta++;
 
                 } catch (Exception ex) {
-                    // JOptionPane.showMessageDialog(null, ex.toString());
+                     //JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-            // e.printStackTrace();
+             //e.printStackTrace();
         }
     }
 
@@ -1070,10 +1071,12 @@ public class Migrator {
         //m1.migrationPosCashBalance(conex);
         //m1.migrationInstallmentsPayments(conex);
         //m1.migrationAMT_PREVIOUS_DETAILS(conex);
+        //m1.migrationCreditCardBalance(conex); 
+        //m1.migrationAMT_BALANCE_DETAILS(conex);
+        //m1.migrationCNTBalanceDetails(conex);
         /*-------------------------------------Faltan------------------------*/
-        m1.migrationCreditCardBalance(conex); 
-        m1.migrationAMT_BALANCE_DETAILS(conex);
-        m1.migrationCNTBalanceDetails(conex);
+
+        
     }
 
 }
