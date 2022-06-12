@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author garroakion
  */
 public class Interface extends javax.swing.JFrame {
-
+    
     protected Conn connect = null;
 
     /**
@@ -31,40 +31,40 @@ public class Interface extends javax.swing.JFrame {
         ConecctSQL();
         disableAllComponents();
     }
-
+    
     private void disableAllComponents() {
         changeStateHomePanel(false);
         changeStateLoansPanel(false);
         changeStateBalancePanel(false);
         changeStatePeoplePanel(false);
         changeStateHome2Panel(false);
-
+        
     }
-
+    
     private void changeStateHomePanel(Boolean flag) {
         this.homePanel.setVisible(flag);
         this.homePanel.setEnabled(flag);
     }
-
+    
     private void changeStateLoansPanel(Boolean flag) {
         this.loansPanel.setVisible(flag);
         this.loansPanel.setEnabled(flag);
     }
-
+    
     private void changeStateBalancePanel(Boolean flag) {
         this.balancePanel.setVisible(flag);
         this.balancePanel.setEnabled(flag);
-
+        
     }
-
+    
     private void changeStatePeoplePanel(Boolean flag) {
-
-        this.peoplePanel.setVisible(flag);
-        this.peoplePanel.setEnabled(flag);
+        
+        this.cardsPanel.setVisible(flag);
+        this.cardsPanel.setEnabled(flag);
     }
-
+    
     private void changeStateHome2Panel(Boolean flag) {
-
+        
         this.homePanel2.setVisible(flag);
         this.homePanel2.setEnabled(flag);
     }
@@ -80,7 +80,17 @@ public class Interface extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        cardsPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        idPeople = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        creditCardList = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        cantidaRegistros = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         loansPanel = new javax.swing.JPanel();
+        cantidaRegistrosLoans = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         loansList = new javax.swing.JList<>();
         searchLoans = new javax.swing.JButton();
@@ -94,14 +104,14 @@ public class Interface extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         comboIncomeTotal = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        labelTx = new javax.swing.JLabel();
         homePanel2 = new javax.swing.JPanel();
         balancePanel = new javax.swing.JPanel();
-        peoplePanel = new javax.swing.JPanel();
         homePanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
         dashLabel = new javax.swing.JLabel();
         loansLabel = new javax.swing.JLabel();
-        peopleLabel = new javax.swing.JLabel();
+        cardsLabel = new javax.swing.JLabel();
         balanceLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,11 +125,68 @@ public class Interface extends javax.swing.JFrame {
         setState(60);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cardsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        cardsPanel.setMaximumSize(new java.awt.Dimension(800, 600));
+        cardsPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        cardsPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        cardsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Credit Card Balance");
+        cardsPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 30));
+
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Cantidad Registros:");
+        cardsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, -1, 30));
+
+        idPeople.setBackground(new java.awt.Color(255, 255, 255));
+        idPeople.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        idPeople.setForeground(new java.awt.Color(0, 0, 0));
+        idPeople.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cardsPanel.add(idPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 455, 180, 30));
+
+        creditCardList.setBackground(new java.awt.Color(255, 255, 255));
+        creditCardList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        creditCardList.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        creditCardList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(creditCardList);
+
+        cardsPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 650, 410));
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Search Balance");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        cardsPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 130, 40));
+
+        cantidaRegistros.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        cantidaRegistros.setForeground(new java.awt.Color(0, 0, 0));
+        cardsPanel.add(cantidaRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 450, 90, 30));
+
+        jLabel9.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("ID:");
+        cardsPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 455, 30, 30));
+
+        getContentPane().add(cardsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
         loansPanel.setBackground(new java.awt.Color(255, 255, 255));
         loansPanel.setMaximumSize(new java.awt.Dimension(800, 600));
         loansPanel.setMinimumSize(new java.awt.Dimension(800, 600));
         loansPanel.setPreferredSize(new java.awt.Dimension(800, 600));
         loansPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cantidaRegistrosLoans.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        cantidaRegistrosLoans.setForeground(new java.awt.Color(0, 0, 0));
+        loansPanel.add(cantidaRegistrosLoans, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 140, 30));
 
         jScrollPane1.setBorder(null);
 
@@ -138,7 +205,7 @@ public class Interface extends javax.swing.JFrame {
                 searchLoansActionPerformed(evt);
             }
         });
-        loansPanel.add(searchLoans, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, 150, -1));
+        loansPanel.add(searchLoans, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 110, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -183,6 +250,11 @@ public class Interface extends javax.swing.JFrame {
         jLabel1.setText("Filtros de busqueda:");
         loansPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 30));
 
+        labelTx.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        labelTx.setForeground(new java.awt.Color(0, 0, 0));
+        labelTx.setText("Cantidad de registros:");
+        loansPanel.add(labelTx, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 180, 30));
+
         getContentPane().add(loansPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
 
         homePanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -198,13 +270,6 @@ public class Interface extends javax.swing.JFrame {
         balancePanel.setPreferredSize(new java.awt.Dimension(800, 600));
         balancePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(balancePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
-
-        peoplePanel.setBackground(new java.awt.Color(255, 255, 255));
-        peoplePanel.setMaximumSize(new java.awt.Dimension(800, 600));
-        peoplePanel.setMinimumSize(new java.awt.Dimension(800, 600));
-        peoplePanel.setPreferredSize(new java.awt.Dimension(800, 600));
-        peoplePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(peoplePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
 
         homePanel.setBackground(new java.awt.Color(255, 255, 255));
         homePanel.setMaximumSize(new java.awt.Dimension(800, 600));
@@ -234,17 +299,17 @@ public class Interface extends javax.swing.JFrame {
         });
         menuPanel.add(loansLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 30));
 
-        peopleLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        peopleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        peopleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        peopleLabel.setText("People");
-        peopleLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        peopleLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        cardsLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        cardsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        cardsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cardsLabel.setText("Cards");
+        cardsLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cardsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                peopleLabelMouseClicked(evt);
+                cardsLabelMouseClicked(evt);
             }
         });
-        menuPanel.add(peopleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 110, 30));
+        menuPanel.add(cardsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 110, 30));
 
         balanceLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         balanceLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -269,10 +334,10 @@ public class Interface extends javax.swing.JFrame {
         changeStateLoansPanel(true);
     }//GEN-LAST:event_loansLabelMouseClicked
 
-    private void peopleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peopleLabelMouseClicked
+    private void cardsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardsLabelMouseClicked
         disableAllComponents();
         this.changeStatePeoplePanel(true);
-    }//GEN-LAST:event_peopleLabelMouseClicked
+    }//GEN-LAST:event_cardsLabelMouseClicked
 
     private void balanceLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_balanceLabelMouseClicked
         disableAllComponents();
@@ -281,20 +346,19 @@ public class Interface extends javax.swing.JFrame {
 
     private void searchLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLoansActionPerformed
         
-        
         String incomeType = this.comboIncomeType.getSelectedItem().toString();
         String Active = this.comboStatus.getSelectedItem().toString();
         String ContractType = this.comboContract.getSelectedItem().toString();
         String total = this.comboIncomeTotal.getSelectedItem().toString();
-
+        
         CallableStatement cstmt = null;
         ResultSet rs = null;
         try {
             cstmt = connect.obtainConnection().prepareCall(
-                    "{call dbo.SPGetAllLoans(?,?,?,?)}",
+                    "{call dbo.SPGetAllLoansWithParamethers(?,?,?,?)}",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-
+            
             cstmt.setString("inputIncome", incomeType);
             cstmt.setString("inputActive", Active);
             cstmt.setString("inputContract", ContractType);
@@ -302,12 +366,12 @@ public class Interface extends javax.swing.JFrame {
             
             cstmt.execute();
             rs = cstmt.getResultSet();
-
+            
             DefaultListModel model = new DefaultListModel();
-            model.clear();
             this.loansList.setModel(model);
-            System.out.println("Inica");
+            int i=0;
             while (rs.next()) {
+                i++;
                 String value
                         = "ID: " + rs.getInt("SK_ID_CURR") + "    "
                         + "Contract Type: " + rs.getString("NAME_CONTRACT_TYPE") + "    "
@@ -316,9 +380,9 @@ public class Interface extends javax.swing.JFrame {
                         + "Credit Active: " + rs.getString("CREDIT_ACTIVE") + "    "
                         + "Months Balance: " + rs.getString("MONTHS_BALANCE");
                 model.addElement(value);
-
+                
             }
-            System.out.println("Termina");
+            this.cantidaRegistrosLoans.setText(""+i);
         } catch (Exception ex) {
             System.out.println(ex.toString());
         } finally {
@@ -336,12 +400,70 @@ public class Interface extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 System.out.println(ex.toString());
             }
-
+            
         }
-
+        
 
     }//GEN-LAST:event_searchLoansActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String id = this.idPeople.getText();
+        if (!id.equals("")) {
+            CallableStatement cstmt = null;
+            ResultSet rs = null;
+            try {
+                cstmt = connect.obtainConnection().prepareCall(
+                        "{call dbo.SPGetCredidCardDetails(?)}",
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+                
+                cstmt.setString("inputID", id);
+                
+                cstmt.execute();
+                rs = cstmt.getResultSet();
+                
+                DefaultListModel model = new DefaultListModel();
+                this.creditCardList.setModel(model);
+                
+                int i = 0;
+                while (rs.next()) {
+                    i++;
+                    String value
+                            = "ID: " + rs.getInt("SK_ID_CURR") + "    "
+                            + "Code Gender: " + rs.getString("CODE_GENDER") + "    "
+                            + "Months Balance: " + rs.getString("MONTHS_BALANCE") + "    "
+                            + "Balance: " + rs.getString("BALANCE") + "    "
+                            + "Credit Limit: " + rs.getString("CREDIT_LIMIT_ACTUAL") + "    ";
+                    model.addElement(value);
+                    
+                }
+                this.cantidaRegistros.setText("" + i);
+                
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println(ex.toString());
+                    }
+                }
+            }
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.toString());
+                }
+                
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Digite un id");
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
     private void ConecctSQL() {
         this.connect = new Conn();
         System.out.println("Inicio correcto");
@@ -388,26 +510,36 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel balancePanel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel cantidaRegistros;
+    private javax.swing.JLabel cantidaRegistrosLoans;
+    private javax.swing.JLabel cardsLabel;
+    private javax.swing.JPanel cardsPanel;
     private javax.swing.JComboBox<String> comboContract;
     private javax.swing.JComboBox<String> comboIncomeTotal;
     private javax.swing.JComboBox<String> comboIncomeType;
     private javax.swing.JComboBox<String> comboStatus;
+    private javax.swing.JList<String> creditCardList;
     private javax.swing.JLabel dashLabel;
     private javax.swing.JPanel homePanel;
     private javax.swing.JPanel homePanel2;
+    private javax.swing.JTextField idPeople;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelTx;
     private javax.swing.JLabel loansLabel;
     private javax.swing.JList<String> loansList;
     private javax.swing.JPanel loansPanel;
     private javax.swing.JPanel menuPanel;
-    private javax.swing.JLabel peopleLabel;
-    private javax.swing.JPanel peoplePanel;
     private javax.swing.JButton searchLoans;
     // End of variables declaration//GEN-END:variables
 }

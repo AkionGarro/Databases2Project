@@ -1,6 +1,6 @@
-
-DROP PROCEDURE SPGetAllLoans;
-CREATE PROCEDURE SPGetAllLoans  
+use ProyectoBasesDatos2;
+DROP PROCEDURE SPGetAllLoansWithParamethers;
+CREATE PROCEDURE SPGetAllLoansWithParamethers  
 	@inputIncome VARCHAR(50),
     @inputActive VARCHAR(50),
 	@inputContract VARCHAR(50),
@@ -27,4 +27,19 @@ bb.MONTHS_BALANCE
 
 
 
- 
+DROP PROCEDURE SPGetCredidCardDetails ;
+CREATE PROCEDURE SPGetCredidCardDetails 
+	@inputID VARCHAR(50)
+
+AS
+	BEGIN
+		SELECT app.SK_ID_CURR,app.CODE_GENDER,cb.MONTHS_BALANCE,
+		bd.BALANCE,bd.CREDIT_LIMIT_ACTUAL
+		FROM ACCESO.application_train AS app
+		JOIN Saldos.credit_card_balance as cb
+			ON(app.SK_ID_CURR = cb.SK_ID_CURR)
+		JOIN Saldos.AMT_BALANCE_DETAILS  as bd
+			ON (cb.ID_CCB = bd.ID_CCB)
+		WHERE  app.SK_ID_CURR like @inputID +'%'
+	
+END
