@@ -56,6 +56,7 @@ public class Interface extends javax.swing.JFrame {
         getContentPane().add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConecctSQL() {
