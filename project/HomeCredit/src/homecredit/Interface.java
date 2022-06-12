@@ -4,10 +4,15 @@
  */
 package homecredit;
 
+import homecredit.controllers.Consultas;
 import homecredit.dbConnection.Conn;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +29,44 @@ public class Interface extends javax.swing.JFrame {
     public Interface() {
         initComponents();
         ConecctSQL();
+        disableAllComponents();
+    }
+
+    private void disableAllComponents() {
+        changeStateHomePanel(false);
+        changeStateLoansPanel(false);
+        changeStateBalancePanel(false);
+        changeStatePeoplePanel(false);
+        changeStateHome2Panel(false);
+
+    }
+
+    private void changeStateHomePanel(Boolean flag) {
+        this.homePanel.setVisible(flag);
+        this.homePanel.setEnabled(flag);
+    }
+
+    private void changeStateLoansPanel(Boolean flag) {
+        this.loansPanel.setVisible(flag);
+        this.loansPanel.setEnabled(flag);
+    }
+
+    private void changeStateBalancePanel(Boolean flag) {
+        this.balancePanel.setVisible(flag);
+        this.balancePanel.setEnabled(flag);
+
+    }
+
+    private void changeStatePeoplePanel(Boolean flag) {
+
+        this.peoplePanel.setVisible(flag);
+        this.peoplePanel.setEnabled(flag);
+    }
+
+    private void changeStateHome2Panel(Boolean flag) {
+
+        this.homePanel2.setVisible(flag);
+        this.homePanel2.setEnabled(flag);
     }
 
     /**
@@ -35,7 +78,31 @@ public class Interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        loansPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        loansList = new javax.swing.JList<>();
+        searchLoans = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        comboStatus = new javax.swing.JComboBox<>();
+        comboIncomeType = new javax.swing.JComboBox<>();
+        comboContract = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        comboIncomeTotal = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        homePanel2 = new javax.swing.JPanel();
+        balancePanel = new javax.swing.JPanel();
+        peoplePanel = new javax.swing.JPanel();
         homePanel = new javax.swing.JPanel();
+        menuPanel = new javax.swing.JPanel();
+        dashLabel = new javax.swing.JLabel();
+        loansLabel = new javax.swing.JLabel();
+        peopleLabel = new javax.swing.JLabel();
+        balanceLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HomeCreditDashBoard");
@@ -48,19 +115,236 @@ public class Interface extends javax.swing.JFrame {
         setState(60);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        loansPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loansPanel.setMaximumSize(new java.awt.Dimension(800, 600));
+        loansPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        loansPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        loansPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setBorder(null);
+
+        loansList.setBackground(new java.awt.Color(255, 255, 255));
+        loansList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        loansList.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        loansList.setForeground(new java.awt.Color(0, 0, 0));
+        loansList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(loansList);
+
+        loansPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 660, 350));
+
+        searchLoans.setText("Search Loans");
+        searchLoans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchLoansActionPerformed(evt);
+            }
+        });
+        loansPanel.add(searchLoans, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, 150, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Income Total");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, 100, 30));
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Contract type");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, 30));
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Income type");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 100, 30));
+
+        comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Closed" }));
+        jPanel1.add(comboStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 110, 30));
+
+        comboIncomeType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Working", "Commercial associate", "State servant", "Pensioner" }));
+        jPanel1.add(comboIncomeType, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 160, 30));
+
+        comboContract.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash loans", "Revolving loans" }));
+        jPanel1.add(comboContract, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 130, 30));
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Credit Status");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 100, 30));
+
+        comboIncomeTotal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50000", "100000", "150000", "200000 ", "250000", "300000", "500000" }));
+        jPanel1.add(comboIncomeTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 150, 30));
+
+        loansPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 660, 90));
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Filtros de busqueda:");
+        loansPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 190, 30));
+
+        getContentPane().add(loansPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
+        homePanel2.setBackground(new java.awt.Color(255, 255, 255));
+        homePanel2.setMaximumSize(new java.awt.Dimension(800, 600));
+        homePanel2.setMinimumSize(new java.awt.Dimension(800, 600));
+        homePanel2.setPreferredSize(new java.awt.Dimension(800, 600));
+        homePanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(homePanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
+        balancePanel.setBackground(new java.awt.Color(255, 255, 255));
+        balancePanel.setMaximumSize(new java.awt.Dimension(800, 600));
+        balancePanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        balancePanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        balancePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(balancePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
+        peoplePanel.setBackground(new java.awt.Color(255, 255, 255));
+        peoplePanel.setMaximumSize(new java.awt.Dimension(800, 600));
+        peoplePanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        peoplePanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        peoplePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(peoplePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
         homePanel.setBackground(new java.awt.Color(255, 255, 255));
         homePanel.setMaximumSize(new java.awt.Dimension(800, 600));
         homePanel.setMinimumSize(new java.awt.Dimension(800, 600));
         homePanel.setPreferredSize(new java.awt.Dimension(800, 600));
         homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+        getContentPane().add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
+        menuPanel.setBackground(new java.awt.Color(0, 82, 248));
+        menuPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        dashLabel.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        dashLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dashLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dashLabel.setText("DashBoard");
+        menuPanel.add(dashLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 30));
+
+        loansLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        loansLabel.setForeground(new java.awt.Color(255, 255, 255));
+        loansLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loansLabel.setText("Loans");
+        loansLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        loansLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loansLabelMouseClicked(evt);
+            }
+        });
+        menuPanel.add(loansLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 30));
+
+        peopleLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        peopleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        peopleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        peopleLabel.setText("People");
+        peopleLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        peopleLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                peopleLabelMouseClicked(evt);
+            }
+        });
+        menuPanel.add(peopleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 110, 30));
+
+        balanceLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        balanceLabel.setForeground(new java.awt.Color(255, 255, 255));
+        balanceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        balanceLabel.setText("Balances");
+        balanceLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        balanceLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                balanceLabelMouseClicked(evt);
+            }
+        });
+        menuPanel.add(balanceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 110, 30));
+
+        getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 600));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void loansLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loansLabelMouseClicked
+        disableAllComponents();
+        changeStateLoansPanel(true);
+    }//GEN-LAST:event_loansLabelMouseClicked
+
+    private void peopleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peopleLabelMouseClicked
+        disableAllComponents();
+        this.changeStatePeoplePanel(true);
+    }//GEN-LAST:event_peopleLabelMouseClicked
+
+    private void balanceLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_balanceLabelMouseClicked
+        disableAllComponents();
+        this.changeStateBalancePanel(true);
+    }//GEN-LAST:event_balanceLabelMouseClicked
+
+    private void searchLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLoansActionPerformed
+        
+        
+        String incomeType = this.comboIncomeType.getSelectedItem().toString();
+        String Active = this.comboStatus.getSelectedItem().toString();
+        String ContractType = this.comboContract.getSelectedItem().toString();
+        String total = this.comboIncomeTotal.getSelectedItem().toString();
+
+        CallableStatement cstmt = null;
+        ResultSet rs = null;
+        try {
+            cstmt = connect.obtainConnection().prepareCall(
+                    "{call dbo.SPGetAllLoans(?,?,?,?)}",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            cstmt.setString("inputIncome", incomeType);
+            cstmt.setString("inputActive", Active);
+            cstmt.setString("inputContract", ContractType);
+            cstmt.setString("inputTotal", total);
+            
+            cstmt.execute();
+            rs = cstmt.getResultSet();
+
+            DefaultListModel model = new DefaultListModel();
+            model.clear();
+            this.loansList.setModel(model);
+            System.out.println("Inica");
+            while (rs.next()) {
+                String value
+                        = "ID: " + rs.getInt("SK_ID_CURR") + "    "
+                        + "Contract Type: " + rs.getString("NAME_CONTRACT_TYPE") + "    "
+                        + "Income: " + rs.getString("AMT_INCOME_TOTAL") + "    "
+                        + "Income Type: " + rs.getString("NAME_INCOME_TYPE") + "    "
+                        + "Credit Active: " + rs.getString("CREDIT_ACTIVE") + "    "
+                        + "Months Balance: " + rs.getString("MONTHS_BALANCE");
+                model.addElement(value);
+
+            }
+            System.out.println("Termina");
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.toString());
+                }
+            }
+        }
+        if (cstmt != null) {
+            try {
+                cstmt.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+
+        }
+
+
+    }//GEN-LAST:event_searchLoansActionPerformed
+
     private void ConecctSQL() {
         this.connect = new Conn();
+        System.out.println("Inicio correcto");
     }
 
     /**
@@ -100,6 +384,30 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel balanceLabel;
+    private javax.swing.JPanel balancePanel;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JComboBox<String> comboContract;
+    private javax.swing.JComboBox<String> comboIncomeTotal;
+    private javax.swing.JComboBox<String> comboIncomeType;
+    private javax.swing.JComboBox<String> comboStatus;
+    private javax.swing.JLabel dashLabel;
     private javax.swing.JPanel homePanel;
+    private javax.swing.JPanel homePanel2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel loansLabel;
+    private javax.swing.JList<String> loansList;
+    private javax.swing.JPanel loansPanel;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel peopleLabel;
+    private javax.swing.JPanel peoplePanel;
+    private javax.swing.JButton searchLoans;
     // End of variables declaration//GEN-END:variables
 }
