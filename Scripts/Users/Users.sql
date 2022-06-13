@@ -28,6 +28,7 @@ USE [ProyectoBasesDatos2]
 GO
 ALTER ROLE [db_datareader] ADD MEMBER [creditUser]
 GO
+GRANT EXECUTE TO creditUser
 
 
 
@@ -50,3 +51,4 @@ USE [ProyectoBasesDatos2]
 GO
 ALTER ROLE [db_backupoperator] ADD MEMBER [creditBackup]
 GO
+
