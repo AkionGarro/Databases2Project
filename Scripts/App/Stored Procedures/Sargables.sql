@@ -43,3 +43,42 @@ AS
 		WHERE  app.SK_ID_CURR like @inputID +'%'
 	
 END
+
+
+DROP PROCEDURE SPGetPaymentsCapacity;
+CREATE PROCEDURE SPGetPaymentsCapacity
+@userId VARCHAR(50)
+
+AS
+	BEGIN
+		SELECT app.SK_ID_CURR,app.AMT_INCOME_TOTAL,
+		isp.AMT_PAYMENT,ad.APARTMENTS_AVG,ad.HOUSETYPE_MODE,ad.WALLSMATERIAL_MODE
+		FROM Acceso.application_train AS  app
+		JOIN Saldos.installments_payments AS isp
+		ON (app.SK_ID_CURR = isp.SK_ID_CURR) 
+		JOIN Acceso.ClientApartmentsDetails AS ad
+		ON(app.SK_ID_CURR = ad.SK_ID_CURR)
+		WHERE app.SK_ID_CURR LIKE @userId +'%' 
+END
+
+
+DROP PROCEDURE SPGetContractType;
+CREATE PROCEDURE SPGetContractType
+AS
+	BEGIN
+SELECT 
+      [SK_ID_PREV],[NAME_CONTRACT_TYPE]
+  FROM [ProyectoBasesDatos2].[Saldos].[previous_application]
+  END
+
+
+
+ DROP PROCEDURE SPGetIncome;
+CREATE PROCEDURE SPGetIncome
+AS
+	BEGIN
+SELECT app.SK_ID_CURR,app.AMT_INCOME_TOTAL
+  FROM [ProyectoBasesDatos2].[Saldos].[previous_application] as pv
+  JOIN Acceso.application_train AS app
+  ON(PV.SK_ID_CURR = APP.SK_ID_CURR)
+  END
