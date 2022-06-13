@@ -18,7 +18,7 @@ public class Conn {
 
         String connectionUrl = "jdbc:sqlserver://DESKTOP-ID1JPQK:1433;"
                 + "database=ProyectoBasesDatos2;"
-                + "user=sa;"
+                + "user=creditUser;"
                 + "password=garroakion2908;"
                 + "loginTimeout=30;";
         try {

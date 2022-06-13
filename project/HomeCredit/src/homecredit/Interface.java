@@ -4,7 +4,6 @@
  */
 package homecredit;
 
-import homecredit.controllers.Consultas;
 import homecredit.dbConnection.Conn;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
