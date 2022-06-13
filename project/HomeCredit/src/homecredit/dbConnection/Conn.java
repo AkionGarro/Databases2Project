@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Conn {
 
@@ -16,10 +17,12 @@ public class Conn {
 
     private void openConnection() {
 
+        String user = (String) JOptionPane.showInputDialog("Digite el usuario:");
+        String contra = (String) JOptionPane.showInputDialog("Digite la contraseña:");
         String connectionUrl = "jdbc:sqlserver://DESKTOP-ID1JPQK:1433;"
                 + "database=ProyectoBasesDatos2;"
-                + "user=creditUser;"
-                + "password=garroakion2908;"
+                + "user=" + user + ";"
+                + "password=" + contra + ";"
                 + "loginTimeout=30;";
         try {
             this.conn = DriverManager.getConnection(connectionUrl);

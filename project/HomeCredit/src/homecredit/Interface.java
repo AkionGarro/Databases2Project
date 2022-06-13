@@ -45,6 +45,8 @@ public class Interface extends javax.swing.JFrame {
         changeStatePaymentsPanel(false);
         changeStateCardsPanel(false);
         changeStateIncome(false);
+        this.graphicComponent.setIcon(null);
+        this.graphicComponent1.setIcon(null);
 
     }
 
@@ -233,7 +235,7 @@ public class Interface extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Income Range Component");
+        jLabel12.setText("Type Loans");
         componentsPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 40));
 
         getContentPane().add(componentsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
@@ -837,16 +839,16 @@ public class Interface extends javax.swing.JFrame {
 
             Double income = Double.parseDouble((String) incomeTable.getValueAt(i, 2));
 
-            if (income <= 10000d) {
+            if (income <= 100000d) {
                 min++;
             }
-            if (income > 100000d) {
+            if (income > 100000d && income <= 200000d) {
                 upper100++;
             }
-            if (income > 200000d) {
+            if (income > 200000d && income <= 300000d) {
                 upper200++;
             }
-            if (income > 300000d) {
+            if (income > 300000d && income <= 400000d) {
                 upper300++;
             }
             if (income > 400000d) {
@@ -872,7 +874,7 @@ public class Interface extends javax.swing.JFrame {
 
     private void ConecctSQL() {
         this.connect = new Conn();
-        System.out.println("Inicio correcto");
+
     }
 
     /**
