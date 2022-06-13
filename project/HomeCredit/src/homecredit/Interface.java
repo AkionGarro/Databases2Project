@@ -14,13 +14,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
  * @author garroakion
  */
 public class Interface extends javax.swing.JFrame {
-    
+
     protected Conn connect = null;
 
     /**
@@ -30,43 +37,43 @@ public class Interface extends javax.swing.JFrame {
         initComponents();
         ConecctSQL();
         disableAllComponents();
+        changeStateLoansPanel(true);
     }
-    
+
     private void disableAllComponents() {
-        changeStateHomePanel(false);
+        changeStateCompnentsPanel(false);
         changeStateLoansPanel(false);
-        changeStateBalancePanel(false);
-        changeStatePeoplePanel(false);
-        changeStateHome2Panel(false);
-        
+        changeStatePaymentsPanel(false);
+        changeStateCardsPanel(false);
+        changeStateIncome(false);
+
     }
-    
-    private void changeStateHomePanel(Boolean flag) {
-        this.homePanel.setVisible(flag);
-        this.homePanel.setEnabled(flag);
+
+    private void changeStateCompnentsPanel(Boolean flag) {
+        this.componentsPanel.setVisible(flag);
+        this.componentsPanel.setEnabled(flag);
     }
-    
+
     private void changeStateLoansPanel(Boolean flag) {
         this.loansPanel.setVisible(flag);
         this.loansPanel.setEnabled(flag);
     }
-    
-    private void changeStateBalancePanel(Boolean flag) {
-        this.balancePanel.setVisible(flag);
-        this.balancePanel.setEnabled(flag);
-        
+
+    private void changeStatePaymentsPanel(Boolean flag) {
+        this.paymentsPanel.setVisible(flag);
+        this.paymentsPanel.setEnabled(flag);
+
     }
-    
-    private void changeStatePeoplePanel(Boolean flag) {
-        
+
+    private void changeStateCardsPanel(Boolean flag) {
+
         this.cardsPanel.setVisible(flag);
         this.cardsPanel.setEnabled(flag);
     }
-    
-    private void changeStateHome2Panel(Boolean flag) {
-        
-        this.homePanel2.setVisible(flag);
-        this.homePanel2.setEnabled(flag);
+
+    private void changeStateIncome(Boolean flag) {
+        this.incomePanel.setVisible(flag);
+        this.incomePanel.setEnabled(flag);
     }
 
     /**
@@ -80,6 +87,27 @@ public class Interface extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        incomePanel = new javax.swing.JPanel();
+        graphicPanel1 = new javax.swing.JPanel();
+        graphicComponent1 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        incomeTable = new javax.swing.JTable();
+        searchIncome = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        componentsPanel = new javax.swing.JPanel();
+        graphicPanel = new javax.swing.JPanel();
+        graphicComponent = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tableComponents = new javax.swing.JTable();
+        SearchButtonComponent = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        paymentsPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        capacityList = new javax.swing.JList<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        userCapacityTxt = new javax.swing.JTextField();
+        capacityButton = new javax.swing.JButton();
         cardsPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -105,25 +133,153 @@ public class Interface extends javax.swing.JFrame {
         comboIncomeTotal = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         labelTx = new javax.swing.JLabel();
-        homePanel2 = new javax.swing.JPanel();
-        balancePanel = new javax.swing.JPanel();
-        homePanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
         dashLabel = new javax.swing.JLabel();
         loansLabel = new javax.swing.JLabel();
         cardsLabel = new javax.swing.JLabel();
-        balanceLabel = new javax.swing.JLabel();
+        paymentsLabel = new javax.swing.JLabel();
+        Components = new javax.swing.JLabel();
+        Incomes = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("HomeCreditDashBoard");
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
         setState(60);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        incomePanel.setBackground(new java.awt.Color(255, 255, 255));
+        incomePanel.setMaximumSize(new java.awt.Dimension(800, 600));
+        incomePanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        incomePanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        incomePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        graphicPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        graphicPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        graphicPanel1.add(graphicComponent1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 360));
+
+        incomePanel.add(graphicPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 690, 360));
+
+        incomeTable.setBackground(new java.awt.Color(255, 255, 255));
+        incomeTable.setForeground(new java.awt.Color(0, 0, 0));
+        incomeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane5.setViewportView(incomeTable);
+
+        incomePanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 690, 170));
+
+        searchIncome.setText("Search");
+        searchIncome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchIncomeMouseClicked(evt);
+            }
+        });
+        incomePanel.add(searchIncome, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, 110, -1));
+
+        jLabel11.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Income Range Component");
+        incomePanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 30));
+
+        getContentPane().add(incomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
+        componentsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        componentsPanel.setMaximumSize(new java.awt.Dimension(800, 600));
+        componentsPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        componentsPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        componentsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        graphicPanel.setBackground(new java.awt.Color(255, 255, 255));
+        graphicPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        graphicPanel.add(graphicComponent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 360));
+
+        componentsPanel.add(graphicPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 690, 360));
+
+        tableComponents.setBackground(new java.awt.Color(255, 255, 255));
+        tableComponents.setForeground(new java.awt.Color(0, 0, 0));
+        tableComponents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane4.setViewportView(tableComponents);
+
+        componentsPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 690, 160));
+
+        SearchButtonComponent.setText("Search");
+        SearchButtonComponent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchButtonComponentMouseClicked(evt);
+            }
+        });
+        componentsPanel.add(SearchButtonComponent, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, 110, -1));
+
+        jLabel12.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Income Range Component");
+        componentsPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 40));
+
+        getContentPane().add(componentsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
+
+        paymentsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        paymentsPanel.setMaximumSize(new java.awt.Dimension(800, 600));
+        paymentsPanel.setMinimumSize(new java.awt.Dimension(800, 600));
+        paymentsPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        paymentsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        capacityList.setBackground(new java.awt.Color(255, 255, 255));
+        capacityList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        capacityList.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        capacityList.setForeground(new java.awt.Color(0, 0, 0));
+        capacityList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane3.setViewportView(capacityList);
+
+        paymentsPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 690, 430));
+
+        jLabel8.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Search User:");
+        paymentsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 130, 30));
+
+        jLabel10.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Payments Capacity of User");
+        paymentsPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 30));
+
+        userCapacityTxt.setBackground(new java.awt.Color(255, 255, 255));
+        userCapacityTxt.setForeground(new java.awt.Color(0, 0, 0));
+        userCapacityTxt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        paymentsPanel.add(userCapacityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 170, 30));
+
+        capacityButton.setText("Buscar");
+        capacityButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capacityButtonActionPerformed(evt);
+            }
+        });
+        paymentsPanel.add(capacityButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, 120, 30));
+
+        getContentPane().add(paymentsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
 
         cardsPanel.setBackground(new java.awt.Color(255, 255, 255));
         cardsPanel.setMaximumSize(new java.awt.Dimension(800, 600));
@@ -257,27 +413,6 @@ public class Interface extends javax.swing.JFrame {
 
         getContentPane().add(loansPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
 
-        homePanel2.setBackground(new java.awt.Color(255, 255, 255));
-        homePanel2.setMaximumSize(new java.awt.Dimension(800, 600));
-        homePanel2.setMinimumSize(new java.awt.Dimension(800, 600));
-        homePanel2.setPreferredSize(new java.awt.Dimension(800, 600));
-        homePanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(homePanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
-
-        balancePanel.setBackground(new java.awt.Color(255, 255, 255));
-        balancePanel.setMaximumSize(new java.awt.Dimension(800, 600));
-        balancePanel.setMinimumSize(new java.awt.Dimension(800, 600));
-        balancePanel.setPreferredSize(new java.awt.Dimension(800, 600));
-        balancePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(balancePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
-
-        homePanel.setBackground(new java.awt.Color(255, 255, 255));
-        homePanel.setMaximumSize(new java.awt.Dimension(800, 600));
-        homePanel.setMinimumSize(new java.awt.Dimension(800, 600));
-        homePanel.setPreferredSize(new java.awt.Dimension(800, 600));
-        homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 690, 600));
-
         menuPanel.setBackground(new java.awt.Color(0, 82, 248));
         menuPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -311,17 +446,41 @@ public class Interface extends javax.swing.JFrame {
         });
         menuPanel.add(cardsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 110, 30));
 
-        balanceLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        balanceLabel.setForeground(new java.awt.Color(255, 255, 255));
-        balanceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        balanceLabel.setText("Balances");
-        balanceLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        balanceLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        paymentsLabel.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        paymentsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        paymentsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        paymentsLabel.setText("Payments");
+        paymentsLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        paymentsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                balanceLabelMouseClicked(evt);
+                paymentsLabelMouseClicked(evt);
             }
         });
-        menuPanel.add(balanceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 110, 30));
+        menuPanel.add(paymentsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 110, 30));
+
+        Components.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Components.setForeground(new java.awt.Color(255, 255, 255));
+        Components.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Components.setText("Loans Type");
+        Components.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Components.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ComponentsMouseClicked(evt);
+            }
+        });
+        menuPanel.add(Components, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 110, 30));
+
+        Incomes.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        Incomes.setForeground(new java.awt.Color(255, 255, 255));
+        Incomes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Incomes.setText("Incomes");
+        Incomes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Incomes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IncomesMouseClicked(evt);
+            }
+        });
+        menuPanel.add(Incomes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 110, 30));
 
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 600));
 
@@ -336,21 +495,21 @@ public class Interface extends javax.swing.JFrame {
 
     private void cardsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardsLabelMouseClicked
         disableAllComponents();
-        this.changeStatePeoplePanel(true);
+        this.changeStateCardsPanel(true);
     }//GEN-LAST:event_cardsLabelMouseClicked
 
-    private void balanceLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_balanceLabelMouseClicked
+    private void paymentsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentsLabelMouseClicked
         disableAllComponents();
-        this.changeStateBalancePanel(true);
-    }//GEN-LAST:event_balanceLabelMouseClicked
+        this.changeStatePaymentsPanel(true);
+    }//GEN-LAST:event_paymentsLabelMouseClicked
 
     private void searchLoansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchLoansActionPerformed
-        
+
         String incomeType = this.comboIncomeType.getSelectedItem().toString();
         String Active = this.comboStatus.getSelectedItem().toString();
         String ContractType = this.comboContract.getSelectedItem().toString();
         String total = this.comboIncomeTotal.getSelectedItem().toString();
-        
+
         CallableStatement cstmt = null;
         ResultSet rs = null;
         try {
@@ -358,18 +517,18 @@ public class Interface extends javax.swing.JFrame {
                     "{call dbo.SPGetAllLoansWithParamethers(?,?,?,?)}",
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            
+
             cstmt.setString("inputIncome", incomeType);
             cstmt.setString("inputActive", Active);
             cstmt.setString("inputContract", ContractType);
             cstmt.setString("inputTotal", total);
-            
+
             cstmt.execute();
             rs = cstmt.getResultSet();
-            
+
             DefaultListModel model = new DefaultListModel();
             this.loansList.setModel(model);
-            int i=0;
+            int i = 0;
             while (rs.next()) {
                 i++;
                 String value
@@ -380,9 +539,9 @@ public class Interface extends javax.swing.JFrame {
                         + "Credit Active: " + rs.getString("CREDIT_ACTIVE") + "    "
                         + "Months Balance: " + rs.getString("MONTHS_BALANCE");
                 model.addElement(value);
-                
+
             }
-            this.cantidaRegistrosLoans.setText(""+i);
+            this.cantidaRegistrosLoans.setText("" + i);
         } catch (Exception ex) {
             System.out.println(ex.toString());
         } finally {
@@ -400,9 +559,9 @@ public class Interface extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 System.out.println(ex.toString());
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_searchLoansActionPerformed
 
@@ -416,15 +575,15 @@ public class Interface extends javax.swing.JFrame {
                         "{call dbo.SPGetCredidCardDetails(?)}",
                         ResultSet.TYPE_SCROLL_INSENSITIVE,
                         ResultSet.CONCUR_READ_ONLY);
-                
+
                 cstmt.setString("inputID", id);
-                
+
                 cstmt.execute();
                 rs = cstmt.getResultSet();
-                
+
                 DefaultListModel model = new DefaultListModel();
                 this.creditCardList.setModel(model);
-                
+
                 int i = 0;
                 while (rs.next()) {
                     i++;
@@ -435,10 +594,10 @@ public class Interface extends javax.swing.JFrame {
                             + "Balance: " + rs.getString("BALANCE") + "    "
                             + "Credit Limit: " + rs.getString("CREDIT_LIMIT_ACTUAL") + "    ";
                     model.addElement(value);
-                    
+
                 }
                 this.cantidaRegistros.setText("" + i);
-                
+
             } catch (Exception ex) {
                 System.out.println(ex.toString());
             } finally {
@@ -456,14 +615,262 @@ public class Interface extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     System.out.println(ex.toString());
                 }
-                
+
             }
         } else {
             JOptionPane.showMessageDialog(null, "Digite un id");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
+    private void capacityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capacityButtonActionPerformed
+        String id = this.userCapacityTxt.getText();
+        if (!id.equals("")) {
+            CallableStatement cstmt = null;
+            ResultSet rs = null;
+            try {
+                cstmt = connect.obtainConnection().prepareCall(
+                        "{call dbo.SPGetPaymentsCapacity(?)}",
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY);
+
+                cstmt.setString("userId", id);
+
+                cstmt.execute();
+                rs = cstmt.getResultSet();
+
+                DefaultListModel model = new DefaultListModel();
+                this.capacityList.setModel(model);
+
+                int i = 0;
+                while (rs.next()) {
+                    i++;
+                    String value
+                            = "ID: " + rs.getInt("SK_ID_CURR") + "    "
+                            + "Income Total: " + rs.getString("AMT_INCOME_TOTAL") + "    "
+                            + "AMT Payment: " + rs.getString("AMT_PAYMENT") + "    "
+                            + "Apartments_AVG: " + rs.getString("APARTMENTS_AVG") + "    "
+                            + "House Type: " + rs.getString("HOUSETYPE_MODE") + "    "
+                            + "WALLSMATERIAL: " + rs.getString("WALLSMATERIAL_MODE") + "    ";
+                    model.addElement(value);
+
+                }
+                this.cantidaRegistros.setText("" + i);
+
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            } finally {
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                        System.out.println(ex.toString());
+                    }
+                }
+            }
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.toString());
+                }
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Digite un id");
+        }
+    }//GEN-LAST:event_capacityButtonActionPerformed
+
+    private void ComponentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComponentsMouseClicked
+
+        disableAllComponents();
+        changeStateCompnentsPanel(true);
+        String[] headers = {"Numero", "ID", "Contract_Type"};
+        DefaultTableModel datamodel = new DefaultTableModel(headers, 0);
+        tableComponents.setModel(datamodel);
+
+    }//GEN-LAST:event_ComponentsMouseClicked
+
+    private void SearchButtonComponentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchButtonComponentMouseClicked
+
+        String[] headers = {"Numero", "ID", "Contract_Type"};
+        DefaultTableModel datamodel = new DefaultTableModel(headers, 0);
+        tableComponents.setModel(datamodel);
+        CallableStatement cstmt = null;
+        ResultSet rs = null;
+        try {
+            cstmt = connect.obtainConnection().prepareCall(
+                    "{call dbo.SPGetContractType}",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            cstmt.execute();
+            rs = cstmt.getResultSet();
+
+            int i = 1;
+            while (rs.next()) {
+                String id = String.valueOf(rs.getInt("SK_ID_PREV"));
+                String[] item = {" " + i, id, rs.getString("NAME_CONTRACT_TYPE")};
+                datamodel.addRow(item);
+                i++;
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.toString());
+                }
+            }
+        }
+        if (cstmt != null) {
+            try {
+                cstmt.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+
+        }
+
+        JFreeChart grafico;
+
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        Integer cashLoans = 0;
+        Integer consumerLoans = 0;
+        Integer revolvingloans = 0;
+        Integer xna = 0;
+        for (int i = 0; i < tableComponents.getRowCount(); i++) {
+
+            String type = (String) tableComponents.getValueAt(i, 2);
+            switch (type) {
+                case "Cash loans":
+                    cashLoans++;
+                    break;
+                case "Consumer loans":
+                    consumerLoans++;
+                    break;
+                case "Revolving loans":
+                    revolvingloans++;
+                    break;
+                case "XNA":
+                    xna++;
+                    break;
+            }
+
+        }
+        datos.addValue(cashLoans, "Cash Loans", "Comparable");
+        datos.addValue(consumerLoans, "Consumer Loans", "Comparable");
+        datos.addValue(revolvingloans, "Resolving Loans", "Comparable");
+        datos.addValue(xna, "XNA", "Comparable");
+
+        grafico = ChartFactory.createBarChart("Tipos de prestamos", "Tipo", "Cantidad", datos);
+        BufferedImage graficoTorta = grafico.createBufferedImage(graphicPanel.getWidth(), graphicPanel.getHeight());
+        graphicComponent.setSize(graphicPanel.getSize());
+        graphicComponent.setIcon(new ImageIcon(graficoTorta));
+        graphicPanel.updateUI();
+    }//GEN-LAST:event_SearchButtonComponentMouseClicked
+
+    private void IncomesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IncomesMouseClicked
+        disableAllComponents();
+        changeStateIncome(true);
+        String[] headers = {"Numero", "ID", "Income Total"};
+        DefaultTableModel datamodel = new DefaultTableModel(headers, 0);
+        incomeTable.setModel(datamodel);
+
+
+    }//GEN-LAST:event_IncomesMouseClicked
+
+    private void searchIncomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIncomeMouseClicked
+        String[] headers = {"Numero", "ID", "Income Total"};
+        DefaultTableModel datamodel = new DefaultTableModel(headers, 0);
+        incomeTable.setModel(datamodel);
+        CallableStatement cstmt = null;
+        ResultSet rs = null;
+        try {
+            cstmt = connect.obtainConnection().prepareCall(
+                    "{call dbo.SPGetIncome}",
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+
+            cstmt.execute();
+            rs = cstmt.getResultSet();
+
+            int i = 1;
+            while (rs.next()) {
+                String id = String.valueOf(rs.getInt("SK_ID_CURR"));
+                String[] item = {" " + i, id, rs.getString("AMT_INCOME_TOTAL")};
+                datamodel.addRow(item);
+                i++;
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.toString());
+                }
+            }
+        }
+        if (cstmt != null) {
+            try {
+                cstmt.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
+
+        }
+
+        JFreeChart grafico2;
+        DefaultCategoryDataset datos2 = new DefaultCategoryDataset();
+        Integer min = 0;
+        Integer upper100 = 0;
+        Integer upper200 = 0;
+        Integer upper300 = 0;
+        Integer upper400 = 0;
+
+        for (int i = 0; i < this.incomeTable.getRowCount(); i++) {
+
+            Double income = Double.parseDouble((String) incomeTable.getValueAt(i, 2));
+
+            if (income <= 10000d) {
+                min++;
+            }
+            if (income > 100000d) {
+                upper100++;
+            }
+            if (income > 200000d) {
+                upper200++;
+            }
+            if (income > 300000d) {
+                upper300++;
+            }
+            if (income > 400000d) {
+                upper400++;
+            }
+
+        }
+
+        datos2.addValue(min, "Low 50 000", "Comparable");
+        datos2.addValue(upper100, "Up 100 000", "Comparable");
+        datos2.addValue(upper200, "Up 200 000", "Comparable");
+        datos2.addValue(upper300, "Up 300 000", "Comparable");
+        datos2.addValue(upper400, "Up 400 000", "Comparable");
+
+        grafico2 = ChartFactory.createBarChart("Tipos de prestamos", "Tipo", "Cantidad", datos2);
+        BufferedImage graficoTorta = grafico2.createBufferedImage(graphicPanel1.getWidth(), graphicPanel1.getHeight());
+
+        graphicComponent1.setSize(graphicPanel1.getSize());
+        graphicComponent1.setIcon(
+                new ImageIcon(graficoTorta));
+        graphicPanel1.updateUI();
+    }//GEN-LAST:event_searchIncomeMouseClicked
+
     private void ConecctSQL() {
         this.connect = new Conn();
         System.out.println("Inicio correcto");
@@ -483,16 +890,24 @@ public class Interface extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -506,40 +921,60 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel balanceLabel;
-    private javax.swing.JPanel balancePanel;
+    private javax.swing.JLabel Components;
+    private javax.swing.JLabel Incomes;
+    private javax.swing.JButton SearchButtonComponent;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel cantidaRegistros;
     private javax.swing.JLabel cantidaRegistrosLoans;
+    private javax.swing.JButton capacityButton;
+    private javax.swing.JList<String> capacityList;
     private javax.swing.JLabel cardsLabel;
     private javax.swing.JPanel cardsPanel;
     private javax.swing.JComboBox<String> comboContract;
     private javax.swing.JComboBox<String> comboIncomeTotal;
     private javax.swing.JComboBox<String> comboIncomeType;
     private javax.swing.JComboBox<String> comboStatus;
+    private javax.swing.JPanel componentsPanel;
     private javax.swing.JList<String> creditCardList;
     private javax.swing.JLabel dashLabel;
-    private javax.swing.JPanel homePanel;
-    private javax.swing.JPanel homePanel2;
+    private javax.swing.JLabel graphicComponent;
+    private javax.swing.JLabel graphicComponent1;
+    private javax.swing.JPanel graphicPanel;
+    private javax.swing.JPanel graphicPanel1;
     private javax.swing.JTextField idPeople;
+    private javax.swing.JPanel incomePanel;
+    private javax.swing.JTable incomeTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel labelTx;
     private javax.swing.JLabel loansLabel;
     private javax.swing.JList<String> loansList;
     private javax.swing.JPanel loansPanel;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel paymentsLabel;
+    private javax.swing.JPanel paymentsPanel;
+    private javax.swing.JButton searchIncome;
     private javax.swing.JButton searchLoans;
+    private javax.swing.JTable tableComponents;
+    private javax.swing.JTextField userCapacityTxt;
     // End of variables declaration//GEN-END:variables
 }
