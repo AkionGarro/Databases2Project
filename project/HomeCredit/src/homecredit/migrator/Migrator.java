@@ -37,36 +37,6 @@ public class Migrator {
      */
     public void migrationAplicationTrain(Conn connect) {
 
-        /*SPInsertApplication_train(
-            @SK_ID_CURR [0]
-           ,@TARGET [1]
-           ,@NAME_CONTRACT_TYPE [2]
-           ,@CODE_GENDER [3]
-           ,@CNT_CHILDREN [6]
-           ,@AMT_INCOME_TOTAL [7]
-           ,@AMT_CREDIT     [8]
-           ,@AMT_ANNUITY    [9]
-           ,@AMT_GOODS_PRICE  [10]
-           ,@NAME_TYPE_SUITE  [11]
-           ,@NAME_INCOME_TYPE  [12]
-           ,@NAME_EDUCATION_TYPE  [13]
-           ,@NAME_FAMILY_STATUS  [14]
-           ,@NAME_HOUSING_TYPE  [15]
-           ,@REGION_POPULATION_RELATIVE  [16]
-           ,@DAYS_BIRTH  [17]
-           ,@DAYS_EMPLOYED  [18]
-           ,@DAYS_REGISTRATION   [19]
-           ,@DAYS_ID_PUBLISH  [20]
-           ,@OWN_CAR_AGE  [21]
-           ,@OCCUPATION_TYPE  [28]
-           ,@CNT_FAM_MEMBERS  [29]
-           ,@OBS_30_CNT_SOCIAL_CIRCLE  [91]
-           ,@DEF_30_CNT_SOCIAL_CIRCLE  [92]
-           ,@OBS_60_CNT_SOCIAL_CIRCLE  [93]
-           ,@DEF_60_CNT_SOCIAL_CIRCLE  [94]
-           ,@DAYS_LAST_PHONE_CHANGE)   [95]
-        
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
@@ -126,57 +96,6 @@ public class Migrator {
      */
     public void migrationClientApartments(Conn connect) {
 
-        /*SPInsertClientApartmentsDetails(
-            @SK_ID_CURR                         [0]
-           ,@APARTMENTS_AVG                     [44]
-           ,@BASEMENTAREA_AVG                   [45]
-           ,@YEARS_BEGINEXPLUATATION_AVG        [46]
-           ,@YEARS_BUILD_AVG                    [47]
-           ,@COMMONAREA_AVG                     [48]
-           ,@ELEVATORS_AVG                      [49]
-           ,@ENTRANCES_AVG                      [50]
-           ,@FLOORSMAX_AVG                      [51]
-           ,@FLOORSMIN_AVG                      [52]
-           ,@LANDAREA_AVG                       [53]
-           ,@LIVINGAPARTMENTS_AVG               [54]
-           ,@LIVINGAREA_AVG                     [55]
-           ,@NONLIVINGAPARTMENTS_AVG            [56]
-           ,@NONLIVINGAREA_AVG                  [57]
-           ,@APARTMENTS_MODE                    [58]
-           ,@BASEMENTAREA_MODE                  [59]
-           ,@YEARS_BEGINEXPLUATATION_MODE       [60]
-           ,@YEARS_BUILD_MODE                   [61]
-           ,@COMMONAREA_MODE                    [62]    
-           ,@ELEVATORS_MODE                     [63]
-           ,@ENTRANCES_MODE                     [64]
-           ,@FLOORSMAX_MODE                     [65]
-           ,@FLOORSMIN_MODE                     [66]
-           ,@LANDAREA_MODE                      [67]
-           ,@LIVINGAPARTMENTS_MODE              [68] 
-           ,@LIVINGAREA_MODE                    [69]   
-           ,@NONLIVINGAPARTMENTS_MODE           [70]
-           ,@NONLIVINGAREA_MODE                 [71]
-           ,@APARTMENTS_MEDI                    [72]
-           ,@BASEMENTAREA_MEDI                  [73]
-           ,@YEARS_BEGINEXPLUATATION_MEDI       [74]
-           ,@YEARS_BUILD_MEDI                   [75]
-           ,@COMMONAREA_MEDI                    [76]
-           ,@ELEVATORS_MEDI                     [77]
-           ,@ENTRANCES_MEDI                     [78]
-           ,@FLOORSMAX_MEDI                     [79]
-           ,@FLOORSMIN_MEDI                     [80]
-           ,@LANDAREA_MEDI                      [81]
-           ,@LIVINGAPARTMENTS_MEDI              [82]
-           ,@LIVINGAREA_MEDI                    [83]
-           ,@NONLIVINGAPARTMENTS_MEDI           [84]
-           ,@NONLIVINGAREA_MEDI                 [85]
-           ,@FONDKAPREMONT_MODE                 [86]
-           ,@HOUSETYPE_MODE                     [87]
-           ,@TOTALAREA_MODE                     [88]
-           ,@WALLSMATERIAL_MODE                 [89]
-           ,@EMERGENCYSTATE_MODE)               [90]
-        
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
@@ -259,24 +178,6 @@ public class Migrator {
      */
     public void migrationAddressClientInformation(Conn connect) {
 
-        /*
-    SPInsertAddressClientInformation(
-           ,@SK_ID_CURR
-           ,@REGION_RATING_CLIENT
-           ,@REGION_RATING_CLIENT_W_CITY
-           ,@WEEKDAY_APPR_PROCESS_START
-           ,@HOUR_APPR_PROCESS_START
-           ,@REG_REGION_NOT_LIVE_REGION
-           ,@REG_REGION_NOT_WORK_REGION
-           ,@LIVE_REGION_NOT_WORK_REGION
-           ,@REG_CITY_NOT_LIVE_CITY
-           ,@REG_CITY_NOT_WORK_CITY
-           ,@LIVE_CITY_NOT_WORK_CITY
-           ,@ORGANIZATION_TYPE
-           ,@EXT_SOURCE_1
-           ,@EXT_SOURCE_2
-           ,@EXT_SOURCE_3)
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
@@ -324,29 +225,6 @@ public class Migrator {
      */
     public void migrationFlagDocument(Conn connect) {
 
-        /*
-        SPInsertFlagDocument(@SK_ID_CURR, @DOCUMENT)
-        96: "FLAG_DOCUMENT_2"
-        97: "FLAG_DOCUMENT_3"
-        98: "FLAG_DOCUMENT_4"
-        99: "FLAG_DOCUMENT_5"
-        100: "FLAG_DOCUMENT_6"
-        101: "FLAG_DOCUMENT_7"
-        102: "FLAG_DOCUMENT_8"
-        103: "FLAG_DOCUMENT_9"
-        104: "FLAG_DOCUMENT_10"
-        105: "FLAG_DOCUMENT_11"
-        106: "FLAG_DOCUMENT_12"
-        107: "FLAG_DOCUMENT_13"
-        108: "FLAG_DOCUMENT_14"
-        109: "FLAG_DOCUMENT_15"
-        110: "FLAG_DOCUMENT_16"
-        111: "FLAG_DOCUMENT_17"
-        112: "FLAG_DOCUMENT_18"
-        113: "FLAG_DOCUMENT_19"
-        114: "FLAG_DOCUMENT_20"
-        115: "FLAG_DOCUMENT_21"
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
@@ -386,19 +264,6 @@ public class Migrator {
      */
     public void migrationFlagsProvidedInfo(Conn connect) {
 
-        /*
-        SPInsertFlagsProvidedInfo( 
-        @SK_ID_CURR, 
-        @FLAG_OWN_CAR, [4]
-        @FLAG_OWN_REALTY,  [5]
-	@FLAG_MOBIL,  [22]
-        @FLAG_EMP_PHONE,  [23]
-        @FLAG_WORK_PHONE,    [24]
-	@FLAG_CONT_MOBILE,    [25]
-        @FLAG_PHONE,     [26]
-        @FLAG_EMAIL)   [27]
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
@@ -435,19 +300,6 @@ public class Migrator {
 
     public void migrationAMTREQCredit(Conn connect) {
 
-        /*
-        SPInsertFlagsProvidedInfo(
-            
-            SPInsertAMT_REQ_CREDIT(
-            @SK_ID_CURR
-           ,@BUREAU_HOUR
-           ,@BUREAU_DAY
-           ,@BUREAU_WEEK
-           ,@BUREAU_MON
-           ,@BUREAU_QRT
-           ,@BUREAU_YEAR)
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(application_train))) {
@@ -487,21 +339,6 @@ public class Migrator {
     /*---------------------------------------------------Bureau-------------------------------------------------*/
     public void migrationBureau(Conn connect) {
 
-        /*
-            SPInsertBureau 
-            @SK_ID_BUREAU VARCHAR(50)
-           ,@SK_ID_CURR VARCHAR(50)
-           ,@CREDIT_ACTIVE VARCHAR(50)
-           ,@CREDIT_CURRENCY VARCHAR(50)
-           ,@DAYS_CREDIT VARCHAR(50)
-           ,@CREDIT_DAY_OVERDUE VARCHAR(50)
-           ,@DAYS_CREDIT_ENDDATE VARCHAR(50)
-           ,@DAYS_ENDDATE_FACT VARCHAR(50)
-           ,@CNT_CREDIT_PROLONG VARCHAR(50)
-           ,@CREDIT_TYPE VARCHAR(50)
-           ,@DAYS_CREDIT_UPDATE VARCHAR(50)
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(bureau))) {
@@ -545,14 +382,6 @@ public class Migrator {
 
     public void migrationBureauBalance(Conn connect) {
 
-        /*
-            SPInsertBureauBalance(
-            @SK_ID_BUREAU
-           ,@MONTHS_BALANCE
-           ,@STATUS)
-
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(bureau_balance))) {
@@ -586,17 +415,6 @@ public class Migrator {
 
     public void migrationAMTCreditDetails(Conn connect) {
 
-        /*
-            SPInsertAMT_CREDIT(
-            @SK_ID_BUREAU
-           ,@MAX_OVERDUE
-           ,@SUM
-           ,@SUM_DEBT
-           ,@SUM_LIMIT
-           ,@SUM_OVERDUE
-           ,@ANNUITY)
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(bureau))) {
@@ -635,42 +453,7 @@ public class Migrator {
 
     /*--------------------------------------------Previous App Connections-------------------------------------------------------*/
     public void migrationPreviousApplication(Conn connect) {
-        /*
-    SPInsertarPreviousApplication(
-        @SK_ID_PREV, 
-        @SK_ID_CURR, 
-        @NAME_CONTRACT_TYPE, 
-	@WEEKDAY_APPR_PROCESS_START, 
-        @HOUR_APPR_PROCESS_START, 
-	@FLAG_LAST_APPL_PER_CONTRACT, 
-        @NFLAG_LAST_APPL_IN_DAY,
-	@RATE_DOWN_PAYMENT, 
-        @RATE_INTEREST_PRIMARY, 
-        @RATE_INTEREST_PRIVILEGED,
-	@NAME_CASH_LOAN_PURPOSE, 
-        @NAME_CONTRACT_STATUS, 
-        @DAYS_DECISION, 
-	@NAME_PAYMENT_TYPE, 
-        @CODE_REJECT_REASON, 
-        @NAME_TYPE_SUITE,
-	@NAME_CLIENT_TYPE, 
-        @NAME_GOODS_CATEGORY, 
-        @NAME_PORTFOLIO, 
-	@NAME_PRODUCT_TYPE, 
-        @CHANNEL_TYPE, 
-        @SELLERPLACE_AREA, 
-	@NAME_SELLER_INDUSTRY, 
-        @CNT_PAYMENT, 
-        @NAME_YIELD_GROUP, 
-	@PRODUCT_COMBINATION, 
-        @DAYS_FIRST_DRAWING, 
-        @DAYS_FIRST_DUE, 
-	@DAYS_LAST_DUE_1ST_VERSION, 
-        @DAYS_LAST_DUE, 
-        @DAYS_TERMINATION, 
-	@NFLAG_INSURED_ON_APPROVAL)
-        
-         */
+
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(previous_application))) {
@@ -736,18 +519,6 @@ public class Migrator {
     /*---------------------------------------------------------------------------------------------------------------------------------*/
     public void migrationPosCashBalance(Conn connect) {
 
-        /*
-    SPInsertPosCashBalance(
-            @SK_ID_PREV
-           ,@SK_ID_CURR
-           ,@MONTHS_BALANCE
-           ,@CNT_INSTALMENT
-           ,@CNT_INSTALMENT_FUTURE
-           ,@NAME_CONTRACT_STATUS
-           ,@SK_DPD
-           ,@SK_DPD_DEF)
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(previous_application))) {
@@ -788,18 +559,6 @@ public class Migrator {
     /*---------------------------------------------------------------------------------------------------------------------------------*/
     public void migrationInstallmentsPayments(Conn connect) {
 
-        /*
-                SPInsertInstallmentsPayments(
-                 @SK_ID_PREV, 
-                 @SK_ID_CURR, 
-                 @NUM_INSTALMENT_VERSION, 
-                 @NUM_INSTALMENT_NUMBER, 
-                 @DAYS_INSTALMENT, 
-                 @DAYS_ENTRY_PAYMENT, 
-                 @AMT_INSTALMENT, 
-                 @AMT_PAYMENT)   
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(this.installments_payments))) {
@@ -841,16 +600,6 @@ public class Migrator {
     /*---------------------------------------------------------------------------------------------------------------------------------*/
     public void migrationAMT_PREVIOUS_DETAILS(Conn connect) {
 
-        /*
-            SPInsertAMT_PREVIOUS_DETAILS(
-            @SK_ID_PREV
-           ,@AMT_ANNUITY
-           ,@AMT_APPLICATION
-           ,@AMT_CREDIT
-           ,@AMT_DOWN_PAYMENT
-           ,@AMT_GOODS_PRICE)
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(this.previous_application))) {
@@ -889,17 +638,6 @@ public class Migrator {
     /*---------------------------------------------------------------------------------------------------------------------------------*/
     public void migrationCreditCardBalance(Conn connect) {
 
-        /*
-            SPInsertCreditCardBalance(
-                    @ID_CCB, 
-                    @SK_ID_PREV, 
-                    @SK_ID_CURR, 
-                    @MONTHS_BALANCE,
-                    @NAME_CONTRACT_STATUS, 
-                    @SK_DPD, 
-                    @SK_DPD_DEF)
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(this.credit_card_balance))) {
@@ -939,25 +677,6 @@ public class Migrator {
 
     public void migrationAMT_BALANCE_DETAILS(Conn connect) {
 
-        /*
-            SPInsertAMT_BALANCE_DETAILS(
-            @ID_CCB
-            , @BALANCE
-            , @CREDIT_LIMIT_ACTUAL
-            , @DRAWINGS_ATM_CURRENT
-            , @DRAWINGS_CURRENT
-            , @DRAWINGS_OTHER_CURRENT
-            , @DRAWINGS_POS_CURRENT
-            , @INST_MIN_REGULARITY
-            , @PAYMENT_CURRENT
-            , @PAYMENT_TOTAL_CURRENT
-            , @RECEIVABLE_PRINCIPAL
-            , @RECIVABLE
-            , @TOTAL_RECEIVABLE
-
-    )
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(this.credit_card_balance))) {
@@ -997,26 +716,12 @@ public class Migrator {
             }
 
         } catch (IOException | CsvValidationException e) {
-             //e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
     public void migrationCNTBalanceDetails(Conn connect) {
 
-        /*
-            SPInsertCNTBalanceDetails(
-            @ID_CCB
-            @DRAWINGS_ATM_CURRENT , 
-            @DRAWINGS_CURRENT ,
-            @DRAWINGS_OTHER_CURRENT ,
-            @DRAWINGS_POS_CURRENT ,
-            @INSTALMENT_MATURE_CUM
-
-    )
-
-    )
-            
-         */
         CallableStatement cstmt = null;
         try (
                  CSVReader reader = new CSVReader(new FileReader(this.credit_card_balance))) {
@@ -1026,7 +731,7 @@ public class Migrator {
             int conta = 2354994;
             while ((nextLine = reader.readNext()) != null) {
                 //Use the tokens as required
-               
+
                 System.out.println(conta);
                 try {
                     cstmt = connect.obtainConnection().prepareCall(
@@ -1044,13 +749,13 @@ public class Migrator {
                     conta++;
 
                 } catch (Exception ex) {
-                     //JOptionPane.showMessageDialog(null, ex.toString());
+                    //JOptionPane.showMessageDialog(null, ex.toString());
                 }
 
             }
 
         } catch (IOException | CsvValidationException e) {
-             //e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
@@ -1075,8 +780,6 @@ public class Migrator {
         //m1.migrationAMT_BALANCE_DETAILS(conex);
         //m1.migrationCNTBalanceDetails(conex);
         /*-------------------------------------Faltan------------------------*/
-
-        
     }
 
 }
